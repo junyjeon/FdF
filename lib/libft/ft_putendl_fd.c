@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_file_type.c                               :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 21:03:08 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/01/04 21:16:25 by junyojeo         ###   ########.fr       */
+/*   Created: 2022/07/09 05:05:52 by junyojeo          #+#    #+#             */
+/*   Updated: 2022/07/29 17:26:53 by junyojeo         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	is_valid_file_type(char *ar)
+void	ft_putendl_fd(char *s, int fd)
 {
-	char	*path_divided;
-	int		size;
-	int		ans;
-
-	size = 0;
-	path_divided = ft_split(ar, '.');
-	if (!path_divided)
-		perror("malloc error");
-	while (path_divided[size] != 0)
-		size++;
-	if (ft_strncmp(path_divided[size - 1], "fdf", 4) == 0)
-		ans = 1;
-	free(path_divided);
-	return (ans);
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }

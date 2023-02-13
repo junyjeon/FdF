@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/02/13 17:45:29 by junyojeo         ###   ########.fr       */
+/*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
+/*   Updated: 2023/02/13 17:52:45 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_error(char *str)
+t_data	init_mlx(char **argv)
 {
-	write(2, str, ft_strlen(str) + 1);
-	exit(1);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int	main(int argc, char **argv)
-{
-	char	*str;
 	t_data	data;
 
-	if (argc != 2)
-		ft_error("\n");
-	str = ft_strrchr(argv[1], '.');
-	if (ft_strncmp(str, ".fdf", 5) != 0)
-		ft_error("only .fdf file can open\n");
-	data = init_mlx(argv);
-	draw_map(&data);
-	cntl_map(&data);
-	mlx_loop(data.mlx);
-	return (0);
+	data.mlx_ptr = mlx_init();
+	data.win_ptr = mlx_new_window(data.mlx, 500, 500, "mlx 42");
+	data.img = mlx_new_image(data.mlx, 250, 250);
+	data.addr = mlx_get_data_addr(data.img, data.bpp, data.size, data.endian);
+	data.bpp = 0;
+	data.size_line = 0;
+	data.endian = 0;
+	data.map = ;
+	data.cam = ;
+	data.handle = ;
+	return (data);
 }

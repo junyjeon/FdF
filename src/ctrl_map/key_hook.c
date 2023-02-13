@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/02/13 17:45:29 by junyojeo         ###   ########.fr       */
+/*   Created: 2023/02/13 17:34:32 by junyojeo          #+#    #+#             */
+/*   Updated: 2023/02/13 17:34:38 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_error(char *str)
-{
-	write(2, str, ft_strlen(str) + 1);
-	exit(1);
-}
 
-void	ft_putchar(char c)
+int	esc_key(t_data *data, int key, void *param)
 {
-	write(1, &c, 1);
-}
-
-int	main(int argc, char **argv)
-{
-	char	*str;
-	t_data	data;
-
-	if (argc != 2)
-		ft_error("\n");
-	str = ft_strrchr(argv[1], '.');
-	if (ft_strncmp(str, ".fdf", 5) != 0)
-		ft_error("only .fdf file can open\n");
-	data = init_mlx(argv);
-	draw_map(&data);
-	cntl_map(&data);
-	mlx_loop(data.mlx);
+	ft_puchar("X");
+	mlx_pixel_put(data->mlx_ptr, data->win_ptr, );
 	return (0);
+}
+
+void	ctrl_map(t_data *data)
+{
+	mlx_key_hook(data->win_ptr, esc_key, (void *)0);
+	mlx_key_hook(data->win_ptr, up_key_hook, (void *)0);
+	mlx_key_hook(data->win_ptr, down_key_hook, (void *)0);
+	mlx_key_hook(data->win_ptr, left_key_hook, (void *)0);
+	mlx_key_hook(data->win_ptr, right_key_hook, (void *)0);
 }

@@ -6,25 +6,28 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/02/13 17:52:45 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:45:45 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
-t_data	init_mlx(char **argv)
+t_mlx	init_mlx(char **argv)
 {
-	t_data	data;
+	t_mlx	mlx;
+	int		bpp;
+	int		sizeline;
+	int		endian;
 
-	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx, 500, 500, "mlx 42");
-	data.img = mlx_new_image(data.mlx, 250, 250);
-	data.addr = mlx_get_data_addr(data.img, data.bpp, data.size, data.endian);
-	data.bpp = 0;
-	data.size_line = 0;
-	data.endian = 0;
-	data.map = ;
-	data.cam = ;
-	data.handle = ;
-	return (data);
+	mlx.mlx_ptr = mlx_init();
+	mlx.win_ptr = mlx_new_window(mlx.mlx, 500, 500, "mlx 42");
+	mlx.img = mlx_new_image(mlx.mlx, 250, 250);
+	bpp = 0;
+	endian = 0;
+	sizeline = 0;
+	mlx.addr = mlx_get_data_addr(mlx.img, bpp, sizeline, endian);
+	mlx.map = read_file(argv);
+	mlx.cam = ;
+	mlx.handle = ;
+	return (mlx);
 }

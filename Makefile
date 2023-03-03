@@ -6,14 +6,14 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/02/13 17:42:37 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/03 16:41:28 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Define the complier and flags
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -MMD -O2 -lmlx -framework OpenGl -framework AppKit
+CFLAGS			=	-Wall -Wextra -Werror -MMD -O2
 LIB				=	-L ./lib/libft/libft.a -lft -L ./lib/minilibx_mms_20191025_beta/mlx.a
 
 # Define the directories
@@ -24,13 +24,12 @@ INC_DIR			=	-I includes
 
 # Define the source files
 
-CTRL_SRCS		=	$(addprefix ctrl_map/, ctrl_map.c)
+CTRL_SRCS		=	$(addprefix ctrl_map/, key_hook.c)
 DRAW_SRCS		=	$(addprefix draw_map/, draw_map.c)
 
-FDF_SRCS		=	$(addprefix $(SRC_DIR)/, fdf.c $(CTRL_SRCS) $(DRAW_SRCS))
-FDF_OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.d, $(FDF_SRC))
-FDF_DEPS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(FDF_SRC))
-
+FDF_SRCS		=	$(addprefix $(SRC_DIR)/, fdf.c init.c $(CTRL_SRCS) $(DRAW_SRCS))
+FDF_OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(FDF_SRC))
+FDF_DEPS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.d, $(FDF_SRC))
 
 FDF		=	fdf
 
@@ -47,7 +46,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | dir_guard
 		@$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
 
 dir_guard:
-		@mkdir -p $(BUILD_DIR)
+		@mkdir -p $(addprefix $(BUILD_DIR)/, ctrl_map)
+		@mkdir -p $(addprefix $(BUILD_DIR)/, draw_map)
 
 clean:
 		@$(RM) -r $(BUILD_DIR)

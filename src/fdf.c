@@ -6,11 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/03 16:45:48 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:50:56 by junyojeo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 void	ft_error(char *str)
 {
@@ -18,35 +18,31 @@ void	ft_error(char *str)
 	exit(1);
 }
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 t_map	*read_file(char **argv)
 {
-	t_map	map;
+	t_map	*map;
 	int		fd;
 	int		i;
 
+	map = (t_map *)malloc(sizeof(t_map));
 	fd = open(argv[1], O_RDONLY);
 	i = 0;
 	while (1)
 	{
-		map.line[i] = get_next_line(fd);
-		if (map.line[i])
+		map->line[i] = get_next_line(fd);
+		if (map->line[i])
 			continue ;
 		else
 			break ;
 		i++;
 	}
-	if (map.line[0])
-		map.x = ft_strlen(map.line[0]);
-	map.y = i;
-	if (map.x <= 0 || map.y <= 0)
-		perror("Error: map size <= 0\n");
+	if (map->line[0])
+		map->width = ft_strlen(map->line[0]);
+	map->height = i;
+	if (map->width <= 0 || map->height <= 0)
+		ft_error("Error: map size <= 0\n");
 	close(fd);
-	return (&map);
+	return (map);
 }
 
 void	fdf(char **argv)
@@ -59,8 +55,8 @@ void	fdf(char **argv)
 		ft_error("Error: only '.fdf' file can open\n");
 	mlx = init_mlx(argv);
 	draw_map(&mlx);
-	cntl_map(&mlx);
-	mlx_loop(mlx.mlx);
+	ctrl_map(&mlx);
+	mlx_loop(&mlx);
 }
 
 int	main(int argc, char **argv)

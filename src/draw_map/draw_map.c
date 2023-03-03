@@ -6,11 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/03 16:35:34 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:56:00 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 //float lerp(float p1, float p2, float d1)
 //{
@@ -61,6 +61,6 @@ void	draw_map(t_mlx *mlx)
 	{
 		j = -1;
 		while (++j < mlx->map->width)
-			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, i, j);
+			mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img, i, j);
 	}
 }

@@ -12,48 +12,19 @@
 
 #include "fdf.h"
 
-void	ft_error(char *str)
+void	ft_puterror(char *str)
 {
-	write(2, str, ft_strlen(str) + 1);
+	ft_putstr_fd(str + '\n', 1);
 	exit(1);
-}
-
-t_map	*read_file(char **argv)
-{
-	t_map	*map;
-	int		fd;
-	int		i;
-
-	map = (t_map *)malloc(sizeof(t_map));
-	fd = open(argv[1], O_RDONLY);
-	i = 0;
-	while (1)
-	{
-		map->line[i] = get_next_line(fd);
-		if (map->line[i])
-			continue ;
-		else
-			break ;
-		i++;
-	}
-	if (map->line[0])
-		map->width = ft_strlen(map->line[0]);
-	map->height = i;
-	if (map->width <= 0 || map->height <= 0)
-		ft_error("Error: map size <= 0\n");
-	close(fd);
-	return (map);
 }
 
 void	fdf(char **argv)
 {
 	t_mlx	mlx;
-	char	*str;
+	t_map	map;
 
-	str = ft_strrchr(argv[1], '.');
-	if (ft_strncmp(str, ".fdf", 5) != 0)
-		ft_error("Error: only '.fdf' file can open\n");
-	mlx = init_mlx(argv);
+	parse_map(argv[1]);
+	init(&mlx, argv);
 	draw_map(&mlx);
 	ctrl_map(&mlx);
 	mlx_loop(&mlx);
@@ -62,7 +33,7 @@ void	fdf(char **argv)
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
-		ft_error("Argument\n");
+		ft_puterror("Usage: ./fdf [filename.fdf]\n");
 	fdf(argv);
 	return (0);
 }

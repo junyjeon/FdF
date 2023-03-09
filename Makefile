@@ -16,16 +16,18 @@ NAME		=	fdf
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-MAC_MLX_FLAG=	-framework OpenGL -framework Appkit
-MMS_MLX_FLAG=	-
+MLX_FLAG=	-framework OpenGL -framework Appkit
 
-LIB_DIR		=	./lib
+
 INC_DIR		=	inc
+LIB_DIR		=	lib
 SRC_DIR		=	src
+MLX_DIR		=	mlx
+
 BUILD_DIR	=	build
 
-MLX_DIR		=	./mlx
-MLX			=	$(addprefix $(MLX_DIR)/, libmlx.a)
+MLX_ARCHIVE		=	$(addprefix ./$(MLX_DIR)/, libmlx.a)
+LIB_ARCHIVE = $(addprefix ./$(INC_DIR)/, libft/libft.a get_next_line/get_next_line.a)
 
 # Define the source files
 CTRL_SRCS	=	$(addprefix ctrl_map/, key_hook.c)
@@ -40,7 +42,7 @@ all:	$(NAME)
 	
 # Define the target and dependencies
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -Lmlx_mms -lmlx $(MAC_MLX_FLAG) -o $@
+	@$(CC) $(CFLAGS) -Lmlx -lmlx $(MLX_FLAG) -o $@
 	@echo "${GREEN}> success 🎉${END}"
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c

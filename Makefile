@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/09 10:52:41 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/09 20:25:37 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,48 +16,43 @@ NAME		=	fdf
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-MLX_FLAG=	-framework OpenGL -framework Appkit
+CPPFLAGS	=	-I . -I mlx -I lib
+LDLIBS		=	-lmlx -lft
+LDFLAGS		=	-L. -Llib
 
-
-INC_DIR		=	inc
-LIB_DIR		=	lib
 SRC_DIR		=	src
-MLX_DIR		=	mlx
-
 BUILD_DIR	=	build
 
-MLX_ARCHIVE		=	$(addprefix ./$(MLX_DIR)/, libmlx.a)
-LIB_ARCHIVE = $(addprefix ./$(INC_DIR)/, libft/libft.a get_next_line/get_next_line.a)
-
 # Define the source files
-CTRL_SRCS	=	$(addprefix ctrl_map/, key_hook.c)
-DRAW_SRCS	=	$(addprefix draw_map/, draw_map.c)
+SRCS		:=	$(addprefix $(SRC_DIR)/, init.c fdf.c)
+SRCS		+=	$(addprefix $(SRC_DIR)/ctrl_map/, key_hook.c)
+SRCS		+=	$(addprefix $(SRC_DIR)/draw_map/, draw_map.c)
 
-SRCS_TOTAL	=	fdf.c init.c $(CTRL_SRCS) $(DRAW_SRCS)
-SRCS		=	$(addprefix $(SRC_DIR)/, $(SRCS_TOTAL))
-OBJS		=	$(patsubst %.c, $(BUILD_DIR)/%.o, $(SRCS_TOTAL))
-DEPS		=	$(patsubst %.c, $(BUILD_DIR)/%.d, $(SRCS_TOTAL))
+OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/obj/%.o, $(SRCS))
+DEPS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/dep/%.d, $(SRCS))
 
 all:	$(NAME)
 	
 # Define the target and dependencies
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -Lmlx -lmlx $(MLX_FLAG) -o $@
-	@echo "${GREEN}> success 🎉${END}"
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -lmlx -c $< -o $@
+$(NAME): $(OBJS)
+			@make -C lib
+			@$(CC) $(CFLAGS) $(LDLIBS) $(LDFLAGS) $< -o $@
+			@echo "${GREEN}> success 🎉${END}"
+
+$(BUILD_DIR)/obj/%.o: $(SRC_DIR)/%.c
+			@mkdir -p $(dir $@)
+			@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	@$(RM) -r $(BUILD_DIR)
+			@$(RM) -r $(BUILD_DIR)
 
 fclean: clean
-	@$(RM) -f $(NAME) $(BUILD_DIR) FDF
-	@echo "${YELLOW}> Cleaning ${END}"
+			@$(RM) -f $(NAME) $(BUILD_DIR) FDF
+			@echo "${YELLOW}> Cleaning ${END}"
 
 re: fclean
-	@make all
+			@make all
 
 .PHONY:	all clean fclean re
 

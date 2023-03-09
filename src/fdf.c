@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/03 18:50:56 by junyojeo          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:26:35 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_puterror(char *str)
 {
-	ft_putstr_fd(str + '\n', 1);
+	ft_putstr_fd(str, 1);
+	ft_putstr_fd("\n", 1);
 	exit(1);
 }
 
@@ -25,8 +26,8 @@ void	fdf(char **argv)
 
 	init(&mlx);
 	parse_map(&map, argv[1]);
-	// draw_map(&mlx);
-	// ctrl_map(&mlx);
+	//draw_map(&mlx);
+	//ctrl_map(&mlx);
 	mlx_loop(&mlx);
 }
 

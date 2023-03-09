@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/03 19:57:05 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/09 10:52:41 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,50 +16,50 @@ NAME		=	fdf
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-MLX_FLAG	=	-L./lib/mlx -framework OpenGL -framework Appkit
+MAC_MLX_FLAG=	-framework OpenGL -framework Appkit
+MMS_MLX_FLAG=	-
 
-HEADERS		=	-I ./include
+LIB_DIR		=	./lib
+INC_DIR		=	inc
+SRC_DIR		=	src
+BUILD_DIR	=	build
+
+MLX_DIR		=	./mlx
+MLX			=	$(addprefix $(MLX_DIR)/, libmlx.a)
 
 # Define the source files
-
 CTRL_SRCS	=	$(addprefix ctrl_map/, key_hook.c)
 DRAW_SRCS	=	$(addprefix draw_map/, draw_map.c)
 
-SRCS		=	$(addprefix src/, fdf.c init.c $(DRAW_SRCS))
-OBJS		=	$(patsubst build/%.c, $(BUILD_DIR)/%.o, $(SRCS))
-DEPS		=	$(patsubst build/%.c, $(BUILD_DIR)/%.d, $(SRCS))
+SRCS_TOTAL	=	fdf.c init.c $(CTRL_SRCS) $(DRAW_SRCS)
+SRCS		=	$(addprefix $(SRC_DIR)/, $(SRCS_TOTAL))
+OBJS		=	$(patsubst %.c, $(BUILD_DIR)/%.o, $(SRCS_TOTAL))
+DEPS		=	$(patsubst %.c, $(BUILD_DIR)/%.d, $(SRCS_TOTAL))
 
 all:	$(NAME)
 	
 # Define the target and dependencies
-
 $(NAME): $(OBJS)
-			$(CC) $(CFLAGS) $(HEADERS) $(MLX_FLAG) $< -o $@
-			@printf "${GREEN}> [FDF] success 🎉${END}"
+	@$(CC) $(CFLAGS) -Lmlx_mms -lmlx $(MAC_MLX_FLAG) -o $@
+	@echo "${GREEN}> success 🎉${END}"
 
-$(BUILD_DIR)/%.o: build/%.c | dir_guard
-			$(CC) $(CFLAGS) $(MLX_FLAG) -c $< -o $@
-
-dir_guard:
-			mkdir -p $(addprefix $(BUILD_DIR)/, ctrl_map)
-			mkdir -p $(addprefix $(BUILD_DIR)/, draw_map)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -lmlx -c $< -o $@
 
 clean:
-			$(RM) -r $(BUILD_DIR)
-			@echo "${YELLOW}> All objects files of the FDF have been deleted.❌${END}"
+	@$(RM) -r $(BUILD_DIR)
 
 fclean: clean
-			$(RM) -f $(NAME) $(BUILD_DIR) FDF
-			@echo "${YELLOW}> Cleaning of the FDF has been done.❌${END}"
+	@$(RM) -f $(NAME) $(BUILD_DIR) FDF
+	@echo "${YELLOW}> Cleaning ${END}"
 
 re: fclean
-			$(MAKE) all
-			@printf "$(GREEN)Cleaned and rebuilt everything for FDF!${END}"
+	@make all
 
-.PHONY:	all clean fclean re dir_guard
+.PHONY:	all clean fclean re
 
 #Colors
-
 END				=	$'\x1b[0m
 BOLD			=	$'\x1b[1m
 UNDER			=	$'\x1b[4m
@@ -72,3 +72,5 @@ BLUE			=	$'\x1b[34m
 PURPLE			=	$'\x1b[35m
 CYAN			=	$'\x1b[36m
 WHITE			=	$'\x1b[37m
+
+-include $(DEPS)

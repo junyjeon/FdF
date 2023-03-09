@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/03 19:56:00 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:36:33 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@
 //	*y = -prev_x * sin(gamma) + prev_y * cos(gamma);
 //}
 
-int	create_argb(int a, int r, int g, int b)
-{
-	return (a << 24 | r << 16 | g << 8 | b);
-}
+// int	create_argb(int a, int r, int g, int b)
+// {
+// 	return (a << 24 | r << 16 | g << 8 | b);
+// }
 
-void	draw_map(t_mlx *mlx)
-{
-	int		i;
-	int		j;
+// void	draw_map(t_mlx *mlx)
+// {
+// 	int		i;
+// 	int		j;
 
-	i = -1;
-	while (++i < mlx->map->height)
-	{
-		j = -1;
-		while (++j < mlx->map->width)
-			mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img, i, j);
-	}
-}
+// 	i = -1;
+// 	while (++i < mlx->map->height)
+// 	{
+// 		j = -1;
+// 		while (++j < mlx->map->width)
+// 			mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img, i, j);
+// 	}
+// }

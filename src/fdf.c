@@ -23,10 +23,10 @@ void	fdf(char **argv)
 	t_mlx	mlx;
 	t_map	map;
 
-	parse_map(argv[1]);
-	init(&mlx, argv);
-	draw_map(&mlx);
-	ctrl_map(&mlx);
+	init(&mlx);
+	parse_map(&map, argv[1]);
+	// draw_map(&mlx);
+	// ctrl_map(&mlx);
 	mlx_loop(&mlx);
 }
 

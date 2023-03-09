@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/06 01:27:09 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:36:15 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@ typedef struct s_mlx
 	void		*win;
 	void		*img;
 }		t_mlx;
+
+
+int		main(int argc, char **argv);
+void	fdf(char **argv);
+
+void	init(t_mlx *mlx);
+void	parse_map(t_map *map, char *filename);
+int		file_check(char *filename);
+
+void	ft_puterror(char *str);
+
+// void	draw_map(t_mlx *mlx);
+// int		create_argb(int a, int r, int g, int b);
 
 
 

@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/10 16:31:17 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/10 16:37:20 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		=	fdf
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-CPPFLAGS	=	-I . -I mlx -I lib
+CPPFLAGS	=	-I . -I mlx -I libft
 
 LIBFT_DIR	=	./libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
@@ -45,7 +45,8 @@ $(LIBFT):
 $(MLX):
 	make -C $(MLX_DIR)
 
-%.o: %.c
+$(BUILD_DIR)/%.o: $(SRC_DIR)%.c
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/10 16:48:18 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/11 05:15:01 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,20 @@ typedef struct s_handle
 
 typedef struct s_mlx
 {
-	void	*mlx_p;
+	void	*mlx;
 	void	*win;
 	void	*img;
-	int		bpp;
-	int		sizeline;
+	int		bits_per_pixel;
+	int		line_length;
 	int		endian;
+	char	*addr;
 }		t_mlx;
 
 void	fdf(char **argv);
 void	init(t_mlx *mlx);
 void	parse_map(t_map *map, char *filename);
 void	ft_puterror(char *str);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
 // void	draw_map(t_mlx *mlx);
 // int	create_argb(int a, int r, int g, int b);

@@ -6,11 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/09 20:27:35 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:44:29 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "fdf.h"
+#include "fdf.h"
 
 //float lerp(float p1, float p2, float d1)
 //{
@@ -51,16 +51,11 @@
 // 	return (a << 24 | r << 16 | g << 8 | b);
 // }
 
-// void	draw_map(t_mlx *mlx)
-// {
-// 	int		i;
-// 	int		j;
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+{
+	char	*dst;
 
-// 	i = -1;
-// 	while (++i < mlx->map->height)
-// 	{
-// 		j = -1;
-// 		while (++j < mlx->map->width)
-// 			mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img, i, j);
-// 	}
-// }
+	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+

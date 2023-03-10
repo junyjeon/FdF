@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/09 20:25:37 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/10 16:31:17 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,57 +17,44 @@ NAME		=	fdf
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 CPPFLAGS	=	-I . -I mlx -I lib
-LDLIBS		=	-lmlx -lft
-LDFLAGS		=	-L. -Llib
+
+LIBFT_DIR	=	./libft
+LIBFT		=	$(LIBFT_DIR)/libft.a
+
+MLX_DIR		=	./mlx
+MLX			=	$(MLX_DIR)/libmlx.a
 
 SRC_DIR		=	src
 BUILD_DIR	=	build
 
 # Define the source files
-SRCS		:=	$(addprefix $(SRC_DIR)/, init.c fdf.c)
-SRCS		+=	$(addprefix $(SRC_DIR)/ctrl_map/, key_hook.c)
-SRCS		+=	$(addprefix $(SRC_DIR)/draw_map/, draw_map.c)
+SRC			=	$(addprefix $(SRC_DIR)/, init.c fdf.c key_hook.c draw_map.c)
+OBJ			=	$(SRC:.c=.o)
 
-OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/obj/%.o, $(SRCS))
-DEPS		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/dep/%.d, $(SRCS))
+# OBJ		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/obj/%.o, $(SRC))
+# DEP		=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/dep/%.d, $(SRC))
 
 all:	$(NAME)
 	
-# Define the target and dependencies
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-$(NAME): $(OBJS)
-			@make -C lib
-			@$(CC) $(CFLAGS) $(LDLIBS) $(LDFLAGS) $< -o $@
-			@echo "${GREEN}> success 🎉${END}"
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
-$(BUILD_DIR)/obj/%.o: $(SRC_DIR)/%.c
-			@mkdir -p $(dir $@)
-			@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+$(MLX):
+	make -C $(MLX_DIR)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
 clean:
-			@$(RM) -r $(BUILD_DIR)
+	rm -f $(OBJ)
+	make -C $(LIBFT_DIR) clean
+	make -C $(MLX_DIR) clean
 
 fclean: clean
-			@$(RM) -f $(NAME) $(BUILD_DIR) FDF
-			@echo "${YELLOW}> Cleaning ${END}"
+	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean
 
-re: fclean
-			@make all
-
-.PHONY:	all clean fclean re
-
-#Colors
-END				=	$'\x1b[0m
-BOLD			=	$'\x1b[1m
-UNDER			=	$'\x1b[4m
-REV				=	$'\x1b[7m
-GREY			=	$'\x1b[30m
-RED				=	$'\x1b[31m
-GREEN			=	$'\x1b[32m
-YELLOW			=	$'\x1b[33m
-BLUE			=	$'\x1b[34m
-PURPLE			=	$'\x1b[35m
-CYAN			=	$'\x1b[36m
-WHITE			=	$'\x1b[37m
-
--include $(DEPS)
+re: fclean alln re

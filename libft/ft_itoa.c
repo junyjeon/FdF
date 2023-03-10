@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 01:07:30 by marvin            #+#    #+#             */
-/*   Updated: 2022/08/03 16:10:30 by junyojeo         ###   ########seoul.kr  */
+/*   Updated: 2023/03/10 15:54:33 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	ft_addnum(int n, char *str, int len)
 {
-	size_t	i;
-
-	i = 1;
 	str[len] = '\0';
 	if (n < 0)
 	{

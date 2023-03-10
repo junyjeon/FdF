@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/10 16:59:36 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/11 05:18:22 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ GNL_DIR		=	./get_next_line
 GNL			=	$(GNL_DIR)/get_next_line.a
 
 MLX_DIR		=	./mlx
-MLX			=	$(MLX_DIR)/libmlx.a
+MLX			=	$(MLX_DIR)/libmlx.dylib
 
 SRC_DIR		=	src
 BUILD_DIR	=	build

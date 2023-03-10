@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/10 16:37:20 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/10 16:59:36 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,13 @@ NAME		=	fdf
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-CPPFLAGS	=	-I . -I mlx -I libft
+CPPFLAGS	=	-I . -I mlx -I libft -I get_next_line
 
 LIBFT_DIR	=	./libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
+
+GNL_DIR		=	./get_next_line
+GNL			=	$(GNL_DIR)/get_next_line.a
 
 MLX_DIR		=	./mlx
 MLX			=	$(MLX_DIR)/libmlx.a
@@ -37,7 +40,8 @@ OBJ			=	$(SRC:.c=.o)
 all:	$(NAME)
 	
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(CPPFLAGS) -L$(LIBFT_DIR) -lft -L$(GNL_DIR)\
+	 -lgnl -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -45,8 +49,7 @@ $(LIBFT):
 $(MLX):
 	make -C $(MLX_DIR)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)%.c
-	mkdir -p $(dir $@)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
 clean:

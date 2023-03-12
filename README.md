@@ -1,5 +1,5 @@
 # fdf
-/<mlx.h> 헤더를 넣고
+<mlx.h> 헤더를 넣고
 
 mlx_init()으로 그래픽 시스템에 대한 연결을 설정
 mlx_new_window()으로 창을 만들고 너비, 높이, 제목을 전달
@@ -12,4 +12,3 @@ mlx_loop()으로 창 렌더링
  <source media="(prefers-color-scheme: light)" srcset="YOUR-LIGHTMODE-IMAGE">
  <img alt="YOUR-ALT-TEXT" src="YOUR-DEFAULT-IMAGE">
 </picture>
-/

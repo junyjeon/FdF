@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/12 16:05:15 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/12 16:14:03 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ NAME		=	fdf
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-CPPFLAGS	=	-I . -I mlx -I libft -I get_next_line
 
 LIBFT_DIR	=	./libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
@@ -45,24 +44,30 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	 -lgnl -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 $(MLX):
-	make -C $(MLX_DIR)
+	@make -C $(MLX_DIR)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | mkdir_dir
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | mkdir
+	$(CC) $(CFLAGS) -I. -I$(GNL_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
-mkdir_dir:
+mkdir:
 	@mkdir -p $(BUILD_DIR)
 	
 clean:
-	rm -r $(BUILD_DIR)
-	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
+	@$(RM) -r $(BUILD_DIR)
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(GNL_DIR) clean
+	@make -C $(MLX_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	@$(RM) -r $(NAME) $(BUILD_DIR) fdf
+	@make -C $(LIBFT_DIR) fclean
+	@make -C $(GNL_DIR) fclean
+	@make -C $(MLX_DIR) fclean
 
-re: fclean alln re
+re: fclean
+	@$(MAKE)
+
+.PHONY: all mkdir clean fclean re

@@ -2,8 +2,7 @@
  <source media="(prefers-color-scheme: dark)" srcset="YOUR-DARKMODE-IMAGE">
  <source media="(prefers-color-scheme: light)" srcset="YOUR-LIGHTMODE-IMAGE">
  <img alt="YOUR-ALT-TEXT" src="YOUR-DEFAULT-IMAGE">
-</picture>
-# fdf
+</picture># fdf
 <mlx.h> 헤더를 넣고
 
 mlx_init()으로 그래픽 시스템에 대한 연결을 설정

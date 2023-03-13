@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 00:27:03 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:32:38 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ typedef struct s_camera
 
 typedef struct s_map
 {
-	char	**map;
-	int		width;
-	int		height;
+	int	**map;
+	int	width;
+	int	length;
 }		t_map;
 
 typedef struct s_handle

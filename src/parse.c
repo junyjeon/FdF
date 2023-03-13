@@ -6,45 +6,53 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 05:11:17 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:33:58 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	set_map2(t_map *map, t_list *lst)
+static void	get_map(t_map *map, t_list *lst)
 {
 	int		i;
 	int		j;
 	char	**split;
 
-	map->map = (char **)malloc(sizeof(char *) * map->height);
+	map->map = (int **)malloc(sizeof(int *) * map->length);
 	i = 0;
 	while (lst)
 	{
+		map->map[i] = (int *)malloc(sizeof(int) * map->width);
 		split = ft_split(lst->content, ' ');
 		j = -1;
-		while (++j < map->width)
-			map->map[i][j] = ft_atoi(split[i]);
+		while (split[++j])
+		{
+			map->map[i][j] = ft_atoi(split[j]);
+			if (split[j])
+				free(split[j]);
+		}
 		lst = lst->next;
+		free(split);
 		i++;
 	}
 }
 
 static void	set_map(t_map *map, int fd)
 {
+	t_list	**lst;
 	char	*line;
-	t_list	*lst;
 
 	line = get_next_line(fd);
+	lst = (t_list **)malloc(sizeof(t_list *));
 	while (line)
 	{
-		ft_lstadd_back(&lst, ft_lstnew(line));
+		ft_lstadd_back(lst, ft_lstnew((void *)line));
 		line = get_next_line(fd);
 	}
-	map->width = ft_strlen(lst->content);
-	map->height = ft_lstsize(lst);
-	set_map2(map, lst);
+	map->width = ft_strlen((*lst)->content);
+	map->length = ft_lstsize(*lst);
+	get_map(map, *lst);
+	ft_lstclear(lst, free);
 }
 
 static int	file_check(char *filename)
@@ -67,7 +75,7 @@ void	parse(t_map *map, char *filename)
 
 	fd = file_check(filename);
 	set_map(map, fd);
-	if (map->width == 0 || map->height == 0)
+	if (map->width == 0 || map->length == 0)
 		ft_puterror("Error: map size zero");
 	close(fd);
 }

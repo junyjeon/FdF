@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/13 18:18:19 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:37:40 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ typedef struct s_camera
 
 typedef struct s_map
 {
+	char	**map;
 	int		width;
 	int		height;
-	char	**line;
 }		t_map;
 
 typedef struct s_handle
@@ -50,7 +50,7 @@ typedef struct s_mlx
 
 void	fdf(char **argv);
 void	init(t_mlx *mlx);
-void	parse_map(t_map *map, char *filename);
+void	parse(t_map *map, char *filename);
 void	ft_puterror(char *str);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 

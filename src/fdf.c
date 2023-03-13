@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/13 18:25:51 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:37:47 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	fdf(char **argv)
 	t_mlx	mlx;
 	t_map	map;
 
-	init(&mlx, &map);
-	parse_map(&map, argv[1]);
+	init(&mlx);
+	parse(&map, argv[1]);
 	my_mlx_pixel_put(&mlx, 5, 5, 0x00FF0000);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_loop(&mlx);

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 21:48:13 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/08 23:33:18 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 03:52:55 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	**ft_division(char const *s, char c, char **res)
 	size_t	i;
 	size_t	j;
 
-	j = 0 - 1;
+	j = -1;
 	i = 0;
 	while (s[i])
 	{
@@ -54,7 +54,7 @@ static char	**ft_division(char const *s, char c, char **res)
 			if (!res[j])
 			{
 				ft_free(res);
-				return (0);
+				return (NULL);
 			}	
 			i = i + word_len(s, c, i);
 		}
@@ -81,7 +81,9 @@ char	**ft_split(char const *s, char c)
 	res = (char **)malloc(sizeof(char *) * (word_cnt + 1));
 	if (!res)
 		return (0);
-	ft_division(s, c, res);
+	res = ft_division(s, c, res);
+	if (res == NULL)
+		return (NULL);
 	res[word_cnt] = NULL;
 	return (res);
 }

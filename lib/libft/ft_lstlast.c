@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:29:06 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/08/03 15:14:42 by junyojeo         ###   ########seoul.kr  */
+/*   Updated: 2023/03/14 05:10:51 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
-		return (0);
-	while (lst->next != 0)
+		return (NULL);
+	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }

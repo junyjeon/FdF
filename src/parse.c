@@ -6,45 +6,45 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/13 21:20:28 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 05:11:17 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	is_width(char *line, int width, int height)
+static void	set_map2(t_map *map, t_list *lst)
 {
 	int		i;
+	int		j;
 	char	**split;
 
-	split = ft_split(line, ' ');
+	map->map = (char **)malloc(sizeof(char *) * map->height);
 	i = 0;
-	while (split[i])
+	while (lst)
+	{
+		split = ft_split(lst->content, ' ');
+		j = -1;
+		while (++j < map->width)
+			map->map[i][j] = ft_atoi(split[i]);
+		lst = lst->next;
 		i++;
-	free(split);
-	if (0 < height && width != i)
-		ft_puterror("Error: Invalid map");
-	return (i);
+	}
 }
 
-static void	get_map_size(t_map *map, int fd)
+static void	set_map(t_map *map, int fd)
 {
-	int		height;
-	int		width;
 	char	*line;
+	t_list	*lst;
 
-	width = 0;
-	height = 0;
-	while (1)
+	line = get_next_line(fd);
+	while (line)
 	{
+		ft_lstadd_back(&lst, ft_lstnew(line));
 		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		width = is_width(line, width, height);
-		height++;
 	}
-	map->width = width;
-	map->height = height;
+	map->width = ft_strlen(lst->content);
+	map->height = ft_lstsize(lst);
+	set_map2(map, lst);
 }
 
 static int	file_check(char *filename)
@@ -66,8 +66,8 @@ void	parse(t_map *map, char *filename)
 	int		fd;
 
 	fd = file_check(filename);
-	get_map_size(map, fd);
+	set_map(map, fd);
 	if (map->width == 0 || map->height == 0)
-		ft_puterror("Error: map size <= 0");
+		ft_puterror("Error: map size zero");
 	close(fd);
 }

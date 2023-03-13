@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/13 21:54:07 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/14 04:33:29 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME		=	fdf
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g2
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
 LIBFT_DIR	=	./lib/libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
@@ -36,14 +36,17 @@ SRC			=	$(addprefix $(SRC_DIR)/, fdf.c init.c parse.c draw_map.c key_hook.c util
 OBJ			=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
 
 all:	
-	@$(MAKE) -j $(NAME)
+	@$(MAKE) $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(CPPFLAGS) $(LDFLAGS) -framework OpenGL -framework AppKit
+$(NAME): $(OBJ) $(LIBFT) $(GNL) $(MLX)
+	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) -framework OpenGL -framework AppKit
 	@echo "$(GREEN)SUCCESS$(END)"
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) bonus
+
+$(GNL):
+	@make -C $(GNL_DIR)
 
 $(MLX):
 	@make -C $(MLX_DIR)
@@ -58,7 +61,7 @@ clean:
 	@$(RM) -r $(BUILD_DIR)
 
 fclean: clean
-	@$(RM) -r $(NAME) $(BUILD_DIR) fdf
+	@$(RM) -r $(NAME) $(LIBFT) $(GNL) $(MLX) $(BUILD_DIR) fdf
 
 re: fclean
 	@$(MAKE)

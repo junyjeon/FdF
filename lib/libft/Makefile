@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 17:29:46 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/10 16:41:22 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/14 04:32:32 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,13 @@ all :		$(NAME)
 $(NAME) : mandatory
 
 mandatory : $(NAME)($(OBJ))
+
 bonus : $(NAME)($(OBJ) $(BONUS_OBJ))
+
 clean : ; rm -f $(OBJ) $(BONUS_OBJ) 
+
 fclean : clean ; rm -f $(NAME)
+
 re:	fclean all
 
-.PHONY : all .c.o clean fclean re bonus
+.PHONY : all clean fclean re bonus

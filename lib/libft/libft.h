@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:24:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/08/08 21:47:49 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 03:02:50 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*ft_strrchr(const char *s, int c);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
-int			ft_atoi(const char *nptr);
+int			ft_atoi(const char *str);
 
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strdup(const char *s);

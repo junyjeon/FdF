@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 03:50:59 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/24 00:39:28 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 05:30:05 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*newhead;
 
 	newhead = NULL;
-	new = NULL;
 	while (lst)
 	{
 		new = ft_lstnew(f(lst->content));

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 08:34:26 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:55:53 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@
 // 	return (a << 24 | r << 16 | g << 8 | b);
 // }
 
-void	iso_projection(t_mlx *mlx, double *x, double *y, double *z)
-{
-	*z *= mlx->gap? * 0.125 * map->length; 
-}
+//void	iso_projection(t_map *map, double *x, double *y, double *z)
+//{
+//	*z *= mlx->width * 0.125 * map->length;
+//}
 
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)

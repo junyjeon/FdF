@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 08:32:38 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:52:40 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,19 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define WIDTH 256
-# define HEIGHT 256
+# define WIDTH 1920
+# define HEIGHT 1080
+# define SUB_WIDTH 1680
 
 typedef struct s_camera
 {
+	int	alpha;
+	int	beta;
+	int	gamma;
+	int	x_offset;
+	int	y_offset;
+	int	zoom;
+	int	z_divisor;
 }		t_camera;
 
 typedef struct s_map
@@ -49,7 +57,7 @@ typedef struct s_mlx
 }		t_mlx;
 
 void	fdf(char **argv);
-void	init(t_mlx *mlx, t_map *map);
+void	init(t_mlx *mlx, t_map *map, t_camera *camera);
 void	parse(t_map *map, char *filename);
 void	ft_puterror(char *str);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);

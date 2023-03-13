@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/13 18:18:14 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:00:59 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,39 @@
 
 static void	mapset(t_map *map, int fd)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
+	int		k;
+	int		line_cnt;
 	char	*line;
-	char	**split;
 
+	line_cnt = 0;
 	i = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		split = ft_split(line, ' ');
 		j = -1;
-		while (split[++j])
-			map->line[i][j] = ft_atoi(split[j]);
+		k = 0;
+		while (line[++j])
+			if (line[j] != ' ')
+				k++;
+		if (0 < i && line_cnt != k)
+			ft_puterror("Error: Invalid map");
+		else
+			line_cnt = k;
 		i++;
 	}
-	if (map->line[0])
-		map->width = ft_strlen(map->line[0]);
+	map->width = line_cnt;
 	map->height = i;
+	map->line = (char **)malloc(sizeof(char *) * map->height);
+	i = -1;
+	while (++i < map->height)
+	{
+		map->line[i] = ft_atoi(ft_split(line, ' '));
+		free(line);
+	}
 	if (map->width <= 0 || map->height <= 0)
 		ft_puterror("Error: map size <= 0");
 }

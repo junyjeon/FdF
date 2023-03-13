@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/12 16:17:15 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/13 16:38:59 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ MLX_DIR		=	./mlx
 MLX			=	$(MLX_DIR)/libmlx.dylib
 
 CPPFLAGS	=	-I. -I$(GNL_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+LDFLAGS		=	-L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl -L$(MLX_DIR) -lmlx
 
 SRC_DIR		=	src
 BUILD_DIR	=	build
@@ -38,8 +39,7 @@ all:
 	@$(MAKE) -j $(NAME)
 	
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(CPPFLAGS) -L$(LIBFT_DIR) -lft -L$(GNL_DIR)\
-	 -lgnl -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(CPPFLAGS) $(LDFLAGS) -framework OpenGL -framework AppKit
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

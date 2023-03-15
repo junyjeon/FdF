@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 20:56:37 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:55:33 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,25 @@ typedef struct s_point
 
 void		fdf(char **argv);
 void		init(t_mlx *mlx, t_map *map, t_camera *camera);
-void		init_camera(t_camera *camera);
-t_camera	*parse(t_map *map, char *filename);
+void		init_camera(t_map *map, t_camera *camera);
+void		parse(t_map *map, char *filename);
 
 /* Algorithm */
+static void	bresenham(t_mlx *mlx, t_point *px, t_point *py);
 void		isometric(int *x, int *y, int z);
-t_point		*point(t_map *map, t_camera *camera, t_point *p);
+void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
-void		draw(t_mlx *mlx, t_map *map);
+t_point		*point(t_map *map, t_camera *camera, t_point *p);
+void		draw(t_mlx *mlx, t_map *map, t_camera *camera);
 //void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
 /* utils */
-void		ft_puterror(char *str);
-int			get_abs(int a);
-int			get_min(int a, int b);
+void	rotate_x(int *y, int *z, double alpha);
+void	rotate_y(int *x, int *z, double beta);
+void	rotate_z(int *x, int *y, double gamma);
+void	ft_puterror(char *str);
+int		get_less(int a, int b);
+
 
 // void	draw_map(t_mlx *mlx);
 // int	create_argb(int a, int r, int g, int b);

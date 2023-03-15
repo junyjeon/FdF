@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 20:14:41 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:29:31 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,15 @@ static int	file_check(char *filename)
 	return (fd);
 }
 
-t_camera	*parse(t_map *map, char *filename)
+void	parse(t_map *map, char *filename)
 {
-	t_camera *camera;
 	int		fd;
 
 	fd = file_check(filename);
 	set_map(map, fd);
 	if (map->width == 0 || map->height == 0)
 		ft_puterror("Error: map size zero");
-	camera = NULL;
-	init_camera(camera);
 	close(fd);
-	return (camera);
 }
 
 	

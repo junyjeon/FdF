@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 21:02:44 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:57:25 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@
 
 static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
 {
-	delta->x = get_abs(py->x - px->x);
-	delta->y = get_abs(py->y - px->y);
+	delta->x = abs(py->x - px->x);
+	delta->y = abs(py->y - px->y);
 	if (px->x < py->x)
 		step->x = 1;
 	else
@@ -97,36 +97,58 @@ static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
 		step->y = -1;
 }
 
-static void	bresenham(t_mlx *mlx, t_point *px, t_point *py)
+/*
+algorithm Bresenham(x1, y1, x2, y2)
 {
-	t_point	delta;
-	t_point	step;
-	t_point	cur;
-	int		err[2];
-
-	init_delta(px, py, &delta, &step);
-	err[0] = delta.x - delta.y;
-	cur = *px;
-	while (cur.x != py->x || cur.y != py->y)
+	x = x1;
+	y = y1;
+	dx = x2 - x1;
+	dy = y2 - y1;
+	F = 2 * dx - dy;
+	while (x <= x2)
 	{
-		my_mlx_pixel_put(mlx, x, y, create_trgb(0, r, g, b));
-		err[1] = err[0] * 2;
-		if (err[1] < delta.x)
+		put_pixel(x, y);
+		++x;
+		if (F < 0)
+			F = F + 2 * dy;
+		else
 		{
-			err[0] += delta.x;
-			cur.y += step.y;
+			F = F + 2 * dy - 2 * dx;
+			++y;
 		}
-		if (err[1] > -delta.y)
-		{
-			err[0] -= delta.y;
-			cur.x += step.x;
-		}
-	}
-	free(px);
-	px = NULL;
-	free(py);
-	py = NULL;
 }
+*/
+
+//static void	bresenham(t_mlx *mlx, t_point *px, t_point *py)
+//{
+//	t_point	delta;
+//	t_point	step;
+//	t_point	cur;
+//	int		err[2];
+
+//	init_delta(px, py, &delta, &step);
+//	err[0] = delta.x - delta.y;
+//	cur = *px;
+//	while (cur.x != py->x || cur.y != py->y)
+//	{
+//		my_mlx_pixel_put(mlx, x, y, create_trgb(0, r, g, b));
+//		err[1] = err[0] * 2;
+//		if (err[1] < delta.x)
+//		{
+//			err[0] += delta.x;
+//			cur.y += step.y;
+//		}
+//		if (err[1] > -delta.y)
+//		{
+//			err[0] -= delta.y;
+//			cur.x += step.x;
+//		}
+//	}
+//	free(px);
+//	px = NULL;
+//	free(py);
+//	py = NULL;
+//}
 
 static void	draw_background(t_mlx *mlx)
 {
@@ -149,7 +171,7 @@ static void	draw_background(t_mlx *mlx)
 ** line_length: 4000
 */
 
-void	draw(t_mlx *mlx, t_map *map)
+void	draw(t_mlx *mlx, t_map *map, t_camera *camera)
 {
 	int	x;
 	int	y;
@@ -167,8 +189,8 @@ void	draw(t_mlx *mlx, t_map *map)
 			double g = (double)(y) / (SCRN_HEIGHT - 1);
 			double b = 1;
 			color = create_trgb(0, r, g, b);
-			 if (x < map->width - 1)
-			bresenham(mlx, camera, point(mlx, camera, init_point(x, y, map), point(mlx, camera, init_point(x + 1, y, map))));
+			if (x < map->width - 1)
+				bresenham(mlx, camera, point(mlx, camera, init_point(x, y, map), point(mlx, camera, init_point(x + 1, y, map))));
 			if (y < map->height - 1)
 				bresenham(mlx, camera, point(mlx, init_point(x, y, map), point(mlx, camera, init_point(x, y + 1, map))));
 		}

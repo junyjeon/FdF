@@ -6,40 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 15:10:13 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 18:45:50 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static void	rotate_x(int *y, int *z, double alpha)
-{
-	int	prev_y;
-
-	prev_y = *y;
-	*y = prev_y * cos(alpha) + (*z) * sin(alpha);
-	*z = -prev_y * sin(alpha) + (*z) * cos(alpha);
-}
-
-static void	rotate_y(int *x, int *z, double beta)
-{
-	int	prev_x;
-
-	prev_x = *x;
-	*x = prev_x * cos(beta) + (*z) * sin(beta);
-	*z = -prev_x * sin(beta) + (*z) * cos(beta);
-}
-
-static void	rotate_z(int *x, int *y, double gamma)
-{
-	int	prev_x;
-	int	prev_y;
-
-	prev_x = *x;
-	prev_y = *y;
-	*x = prev_x * cos(gamma) - prev_y * sin(gamma);
-	*y = prev_x * sin(gamma) + prev_y * cos(gamma);
-}
 
 static double	get_ratio(int s, int f, int cur)
 {
@@ -51,34 +22,34 @@ static double	get_ratio(int s, int f, int cur)
 	return (ratio);
 }
 
-static int	process_lerp(int s, int f, double ratio)
-{
-	return ((int)((ratio) * s + (1 - ratio) * f));
-}
+//static int	process_lerp(int s, int f, double ratio)
+//{
+//	return ((int)((ratio) * s + (1 - ratio) * f));
+//}
 
 /*
 ** quadrant 1, 4, 5, 8(delta.x > delta.y): sample by x
 ** quadrant 2, 3, 6, 7(delta.x < delta.y): sample by y
 */
 
-int	get_clr(t_point cur, t_point *s, t_point *f, t_point delta)
-{
-	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
+//int	get_clr(t_point cur, t_point *s, t_point *f, t_point delta)
+//{
+//	double	ratio;
+//	int		red;
+//	int		green;
+//	int		blue;
 
-	if (cur.clr == f->clr)
-		return (cur.clr);
-	if (delta.x > delta.y)
-		ratio = get_ratio(s->x, f->x, cur.x);
-	else
-		ratio = get_ratio(s->y, f->y, cur.y);
-	red = process_lerp((f->clr >> 16) & 0xFF, (s->clr >> 16) & 0xFF, ratio);
-	green = process_lerp((f->clr >> 8) & 0xFF, (s->clr >> 8) & 0xFF, ratio);
-	blue = process_lerp(f->clr & 0xFF, s->clr & 0xFF, ratio);
-	return ((red << 16) | (green << 8) | blue);
-}
+//	if (cur.clr == f->clr)
+//		return (cur.clr);
+//	if (delta.x > delta.y)
+//		ratio = get_ratio(s->x, f->x, cur.x);
+//	else
+//		ratio = get_ratio(s->y, f->y, cur.y);
+//	red = process_lerp((f->clr >> 16) & 0xFF, (s->clr >> 16) & 0xFF, ratio);
+//	green = process_lerp((f->clr >> 8) & 0xFF, (s->clr >> 8) & 0xFF, ratio);
+//	blue = process_lerp(f->clr & 0xFF, s->clr & 0xFF, ratio);
+//	return ((red << 16) | (green << 8) | blue);
+//}
 
 // int width = abs(endPosition.X - startPosition.X);
 // int height = abs(endPosition.Y - startPosition.Y);
@@ -127,49 +98,43 @@ int	get_clr(t_point cur, t_point *s, t_point *f, t_point delta)
 // 	}
 // }
 
-static void	isometric(int *x, int *y, int z)
+int create_argb(int a, int r, int g, int b)
 {
-	int	prev_x;
-	int	prev_y;
-
-	prev_x = *x;
-	prev_y = *y;
-	*x = (prev_x - prev_y) * cos(PI / 6);
-	*y = (prev_x + prev_y) * sin(PI / 6) - z;
+	return (a << 24 | r << 16 | g << 8 | b);
 }
 
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
-{
-	char	*dst;
+//void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+//{
+//	int	*dst;
 
-	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+//	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
+//	*(unsigned int*)dst = color;
+//}
+
+static void	put_pixel(t_mlx *mlx, int x, int y, int color)
+{
+	int	 *i;
+
+	if ((SUB_SCRN_WIDTH <= x && x < SCRN_WIDTH) && (0 <= y && y < SCRN_HEIGHT))
+	{
+		i = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
+		*(unsigned int *)i = create_argb();
+	}
 }
 
-t_point *point(t_mlx *mlx, t_mlx *camera, t_point *p)
+static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
 {
-	p->x *= camera->zoom;
-	p->y *= camera->zoom;
-	p->y *= camera->zoom / camera->z_divisor;
-	p->x -= (map->width * camera->zoom) 2;
-	p->y -= (map->length * camera->zoom) / 2;
-	rotate_x(&p->y, &p->z, camera->alpha);
-	rotate_y(&p->x, &p->z, camera->beta);
-	rotate_x(&p->x, &p->y, camera->gamma);
-	if (camera->projection == ISOMETRIC)
-		isometric(&p->x, &p->y, &p->z);
-	p->x += (SCRN_WIDTH - SUB_SCRN_WIDTH) / 2 + SUB_SCRN_WIDTH + camera->x_offset;
-	p->y += SCRN_HEIGHT / 2 + camera->y_offset;
-	p->y += map->length * camera->zoom * 2 / 5;
-	return (p);	 
-}
-
-static void init_delta_and_step(t_point *px, t_point *py, t_point *delta, t_point *step)
-{
-	delta->x = get_abs(px->x - s->x);
+	delta->x = get_abs(py->x - px->x);
 	delta->y = get_abs(py->y - px->y);
+	if (px->x < py->x)
+		step->x = 1;
+	else
+		step->x = -1;
+	if (px->y < py->y)
+		step->y = 1;
+	else
+		step->y = -1;
 }
-
 
 static void	draw_line(t_mlx *mlx, t_point *px, t_point *py)
 {
@@ -178,9 +143,9 @@ static void	draw_line(t_mlx *mlx, t_point *px, t_point *py)
 	t_point	cur;
 	int		err[2];
 
-	init_delta_and_step(px, py, &delta, &step);
+	init_delta(px, py, &delta, &step);
 	err[0] = delta.x - delta.y;
-	cur = *s;
+	cur = *px;
 	while (cur.x != py->x || cur.y != py->y)
 	{
 		put_pixel(mlx, cur.x, cur.y, get_clr(cur, px, py, delta));
@@ -212,9 +177,9 @@ static void	draw_background(t_mlx *mlx)
 	while (++i < SCRN_WIDTH * SCRN_HEIGHT)
 	{
 		if (i % SCRN_WIDTH < SUB_SCRN_WIDTH)
-			img[i] = CLR_SUB_SCRN_BG
+			img[i] = CLR_SUB_SCRN_BG;
 		else
-			img[i] = CLR_MAIN_SCRN_BG
+			img[i] = CLR_MAIN_SCRN_BG;
 	}
 }
 

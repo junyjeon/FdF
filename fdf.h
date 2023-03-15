@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 15:10:12 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 18:46:44 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 /* PI*/
 # define PI	3.141592
 
-
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -51,15 +50,22 @@ typedef struct s_map
 	int	length;
 }		t_map;
 
+typedef enum e_projection
+{
+	ISOMETRIC,
+	PARALLEL
+}	t_projection;
+
 typedef struct s_camera
 {
-	int	alpha;
-	int	beta;
-	int	gamma;
-	int	x_offset;
-	int	y_offset;
-	int	zoom;
-	int	z_divisor;
+	t_projection	projection;
+	int				alpha;
+	int				beta;
+	int				gamma;
+	int				x_offset;
+	int				y_offset;
+	int				zoom;
+	int				z_divisor;
 }		t_camera;
 
 typedef struct s_point
@@ -70,17 +76,20 @@ typedef struct s_point
 	int	clr;
 }		t_point;
 
-typedef enum e_projection
-{
-	ISOMETRIC,
-	PARALLEL
-}	t_projection;
-
 void	fdf(char **argv);
 void	init(t_mlx *mlx, t_map *map, t_camera *camera);
 void	parse(t_map *map, char *filename);
-void	ft_puterror(char *str);
+
+/* Algorithm */
+void	isometric(int *x, int *y, int z);
+
+void	draw(t_mlx *mlx, t_map *map, t_camera *camera);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+
+/* utils */
+void	ft_puterror(char *str);
+int		get_abs(int a);
+int		get_min(int a, int b);
 
 // void	draw_map(t_mlx *mlx);
 // int	create_argb(int a, int r, int g, int b);

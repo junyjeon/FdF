@@ -6,19 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 12:02:30 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:31:46 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	get_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	else
-		return (b);
-}
 
 void	init(t_mlx *mlx, t_map *map, t_camera *camera)
 {
@@ -40,7 +32,7 @@ void	init(t_mlx *mlx, t_map *map, t_camera *camera)
 	camera->beta = 0;
 	camera->gamma = 0;
 	camera->x_offset = 0;
-	camera->y_offset = 0;//A < B ? A : B
+	camera->y_offset = 0;
 	camera->zoom = get_min((SCRN_WIDTH - SUB_SCRN_WIDTH) / map->width / 2, \
 	SCRN_HEIGHT / map->length / 2);
 	camera->z_divisor = 1;

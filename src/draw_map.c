@@ -6,26 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 18:45:50 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:02:44 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static double	get_ratio(int s, int f, int cur)
-{
-	double	ratio;
-
-	if (s == f)
-		return (1.0);
-	ratio = (double)(cur - s) / (f - s);
-	return (ratio);
-}
-
-//static int	process_lerp(int s, int f, double ratio)
-//{
-//	return ((int)((ratio) * s + (1 - ratio) * f));
-//}
 
 /*
 ** quadrant 1, 4, 5, 8(delta.x > delta.y): sample by x
@@ -98,30 +83,6 @@ static double	get_ratio(int s, int f, int cur)
 // 	}
 // }
 
-int create_argb(int a, int r, int g, int b)
-{
-	return (a << 24 | r << 16 | g << 8 | b);
-}
-
-//void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
-//{
-//	int	*dst;
-
-//	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-//	*(unsigned int*)dst = color;
-//}
-
-static void	put_pixel(t_mlx *mlx, int x, int y, int color)
-{
-	int	 *i;
-
-	if ((SUB_SCRN_WIDTH <= x && x < SCRN_WIDTH) && (0 <= y && y < SCRN_HEIGHT))
-	{
-		i = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-		*(unsigned int *)i = create_argb();
-	}
-}
-
 static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
 {
 	delta->x = get_abs(py->x - px->x);
@@ -136,9 +97,9 @@ static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
 		step->y = -1;
 }
 
-static void	draw_line(t_mlx *mlx, t_point *px, t_point *py)
+static void	bresenham(t_mlx *mlx, t_point *px, t_point *py)
 {
-	t_point delta;
+	t_point	delta;
 	t_point	step;
 	t_point	cur;
 	int		err[2];
@@ -148,7 +109,7 @@ static void	draw_line(t_mlx *mlx, t_point *px, t_point *py)
 	cur = *px;
 	while (cur.x != py->x || cur.y != py->y)
 	{
-		put_pixel(mlx, cur.x, cur.y, get_clr(cur, px, py, delta));
+		my_mlx_pixel_put(mlx, x, y, create_trgb(0, r, g, b));
 		err[1] = err[0] * 2;
 		if (err[1] < delta.x)
 		{
@@ -174,7 +135,7 @@ static void	draw_background(t_mlx *mlx)
 
 	img = (int *)(mlx->addr);
 	i = -1;
-	while (++i < SCRN_WIDTH * SCRN_HEIGHT)
+	while (++i < SCRN_WIDTH * SCRN_WIDTH)
 	{
 		if (i % SCRN_WIDTH < SUB_SCRN_WIDTH)
 			img[i] = CLR_SUB_SCRN_BG;
@@ -188,28 +149,28 @@ static void	draw_background(t_mlx *mlx)
 ** line_length: 4000
 */
 
-void	draw(t_mlx *mlx, t_map *map, t_camera *camera)
+void	draw(t_mlx *mlx, t_map *map)
 {
 	int	x;
 	int	y;
 
 	draw_background(mlx);
 	y = -1;
-	while (++y < map->length)
+	while (++y < map->height)
 	{
 		x = -1;
 		while (++x < map->width)
 		{
-			if (x < map->width - 1)
-			{
-				draw_line(mlx, point(mlx, camera, init_point(x, y, map), \
-				point(mlx, camera, init_point(x + 1, y, map))));
-			}
-			if (y < map->length - 1)
-			{
-				draw_line(mlx, camera, point(mlx, init_point(x, y, map), \
-				point(mlx, camera, init_point(x, y + 1, map))));
-			}
+			int color;
+
+			double r = (double)(SCRN_WIDTH - x) / (SCRN_WIDTH - 1);
+			double g = (double)(y) / (SCRN_HEIGHT - 1);
+			double b = 1;
+			color = create_trgb(0, r, g, b);
+			 if (x < map->width - 1)
+			bresenham(mlx, camera, point(mlx, camera, init_point(x, y, map), point(mlx, camera, init_point(x + 1, y, map))));
+			if (y < map->height - 1)
+				bresenham(mlx, camera, point(mlx, init_point(x, y, map), point(mlx, camera, init_point(x, y + 1, map))));
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 08:33:58 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:14:41 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	get_map(t_map *map, t_list *lst)
 	int		j;
 	char	**split;
 
-	map->map = (int **)malloc(sizeof(int *) * map->length);
+	map->map = (int **)malloc(sizeof(int *) * map->height);
 	i = 0;
 	while (lst)
 	{
@@ -50,7 +50,7 @@ static void	set_map(t_map *map, int fd)
 		line = get_next_line(fd);
 	}
 	map->width = ft_strlen((*lst)->content);
-	map->length = ft_lstsize(*lst);
+	map->height = ft_lstsize(*lst);
 	get_map(map, *lst);
 	ft_lstclear(lst, free);
 }
@@ -69,13 +69,19 @@ static int	file_check(char *filename)
 	return (fd);
 }
 
-void	parse(t_map *map, char *filename)
+t_camera	*parse(t_map *map, char *filename)
 {
+	t_camera *camera;
 	int		fd;
 
 	fd = file_check(filename);
 	set_map(map, fd);
-	if (map->width == 0 || map->length == 0)
+	if (map->width == 0 || map->height == 0)
 		ft_puterror("Error: map size zero");
+	camera = NULL;
+	init_camera(camera);
 	close(fd);
+	return (camera);
 }
+
+	

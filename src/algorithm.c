@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:21:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 17:39:21 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:52:22 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	isometric(int *x, int *y, int z)
 
 	prev_x = *x;
 	prev_y = *y;
-	*x = (prev_x - prev_y) * cos(PI / 6);
-	*y = (prev_x + prev_y) * sin(PI / 6) - z;
+	*x = (prev_x - prev_y) * cos(0.5236);
+	*y = (prev_x + prev_y) * sin(0.5236) - z;
 }
 
 t_point	*point(t_map *map, t_camera *camera, t_point *p)
@@ -58,7 +58,7 @@ t_point	*point(t_map *map, t_camera *camera, t_point *p)
 	p->y *= camera->zoom;
 	p->y *= camera->zoom / camera->z_divisor;
 	p->x -= (map->width * camera->zoom) / 2;
-	p->y -= (map->length * camera->zoom) / 2;
+	p->y -= (map->height * camera->zoom) / 2;
 	rotate_x(&p->y, &p->z, camera->alpha);
 	rotate_y(&p->x, &p->z, camera->beta);
 	rotate_x(&p->x, &p->y, camera->gamma);
@@ -67,6 +67,6 @@ t_point	*point(t_map *map, t_camera *camera, t_point *p)
 	p->x += (SCRN_WIDTH - SUB_SCRN_WIDTH) \
 	/ 2 + SUB_SCRN_WIDTH + camera->x_offset;
 	p->y += SCRN_HEIGHT / 2 + camera->y_offset;
-	p->y += map->length * camera->zoom * 2 / 5;
+	p->y += map->height * camera->zoom * 2 / 5;
 	return (p);
 }

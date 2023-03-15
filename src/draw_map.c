@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 21:57:25 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 22:00:44 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,36 +119,36 @@ algorithm Bresenham(x1, y1, x2, y2)
 }
 */
 
-//static void	bresenham(t_mlx *mlx, t_point *px, t_point *py)
-//{
-//	t_point	delta;
-//	t_point	step;
-//	t_point	cur;
-//	int		err[2];
+static void	bresenham(t_mlx *mlx, t_point *px, t_point *py)
+{
+	t_point	delta;
+	t_point	step;
+	t_point	cur;
+	int		err[2];
 
-//	init_delta(px, py, &delta, &step);
-//	err[0] = delta.x - delta.y;
-//	cur = *px;
-//	while (cur.x != py->x || cur.y != py->y)
-//	{
-//		my_mlx_pixel_put(mlx, x, y, create_trgb(0, r, g, b));
-//		err[1] = err[0] * 2;
-//		if (err[1] < delta.x)
-//		{
-//			err[0] += delta.x;
-//			cur.y += step.y;
-//		}
-//		if (err[1] > -delta.y)
-//		{
-//			err[0] -= delta.y;
-//			cur.x += step.x;
-//		}
-//	}
-//	free(px);
-//	px = NULL;
-//	free(py);
-//	py = NULL;
-//}
+	init_delta(px, py, &delta, &step);
+	err[0] = delta.x - delta.y;
+	cur = *px;
+	while (cur.x != py->x || cur.y != py->y)
+	{
+		my_mlx_pixel_put(mlx, x, y, create_trgb(0, r, g, b));
+		err[1] = err[0] * 2;
+		if (err[1] < delta.x)
+		{
+			err[0] += delta.x;
+			cur.y += step.y;
+		}
+		if (err[1] > -delta.y)
+		{
+			err[0] -= delta.y;
+			cur.x += step.x;
+		}
+	}
+	free(px);
+	px = NULL;
+	free(py);
+	py = NULL;
+}
 
 static void	draw_background(t_mlx *mlx)
 {

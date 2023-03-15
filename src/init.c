@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 21:44:02 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:59:34 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@ t_point	*point(t_map *map, t_camera *camera, t_point *p)
 	return (p);
 }
 
-void	init_camera(t_map *map, t_camera *camera)
-{
-	camera->alpha = 0;
-	camera->beta = 0;
-	camera->gamma = 0;
-	camera->x_offset = 0;
-	camera->y_offset = 0;
-	camera->z_divisor = 1;
-	camera->zoom = get_less((SCRN_WIDTH - SUB_SCRN_WIDTH) / map->width / 2, \
-	SCRN_HEIGHT / map->height / 2);
-}
-
 t_point	*init_point(int x, int y, t_map *map, int index)
 {
 	t_point	*point;
@@ -56,6 +44,18 @@ t_point	*init_point(int x, int y, t_map *map, int index)
 	i = y * map->width + x;
 	point->z = map->map[index][i];
 	return (point);
+}
+
+void	init_camera(t_map *map, t_camera *camera)
+{
+	camera->alpha = 0;
+	camera->beta = 0;
+	camera->gamma = 0;
+	camera->x_offset = 0;
+	camera->y_offset = 0;
+	camera->z_divisor = 1;
+	camera->zoom = get_less((SCRN_WIDTH - SUB_SCRN_WIDTH) / map->width / 2, \
+	SCRN_HEIGHT / map->height / 2);
 }
 
 void	init(t_mlx *mlx, t_map *map, t_camera *camera)

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 12:49:15 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:02:40 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void	fdf(char **argv)
 	parse(&map, argv[1]);
 	//iso_projection(&map, x, y, z);
 	//size_control(&mlx, &map);
-	//draw(&mlx);
+	draw(&mlx, &map, &camera);
 	my_mlx_pixel_put(&mlx, 5, 5, 0x00FF0000);
-	// mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	//ft_free(mlx);
 	//mlx_key_hook(mlx.win, key_control, &mlx);
 	// mlx_hook(mlx.win, X_EVENT_KEY_PRESS, 0, &key_press, &mlx);

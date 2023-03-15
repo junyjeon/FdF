@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 12:54:57 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:10:12 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
+# include "math.h"
 # include <unistd.h>
 # include <fcntl.h>
 
@@ -28,31 +29,9 @@
 # define CLR_MAIN_SCRN_BG	0x222222
 # define CLR_SUB_SCRN_BG	0x1E1E1E
 
-typedef struct s_camera
-{
-	int	alpha;
-	int	beta;
-	int	gamma;
-	int	x_offset;
-	int	y_offset;
-	int	zoom;
-	int	z_divisor;
-}		t_camera;
+/* PI*/
+# define PI	3.141592
 
-typedef struct s_map
-{
-	int	**map;
-	int	width;
-	int	length;
-}		t_map;
-
-typedef struct s_point
-{
-	int				x;
-	int				y;
-	int				z;
-	int				clr;
-}		t_point;
 
 typedef struct s_mlx
 {
@@ -64,6 +43,38 @@ typedef struct s_mlx
 	int		line_length;
 	int		endian;
 }		t_mlx;
+
+typedef struct s_map
+{
+	int	**map;
+	int	width;
+	int	length;
+}		t_map;
+
+typedef struct s_camera
+{
+	int	alpha;
+	int	beta;
+	int	gamma;
+	int	x_offset;
+	int	y_offset;
+	int	zoom;
+	int	z_divisor;
+}		t_camera;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	z;
+	int	clr;
+}		t_point;
+
+typedef enum e_projection
+{
+	ISOMETRIC,
+	PARALLEL
+}	t_projection;
 
 void	fdf(char **argv);
 void	init(t_mlx *mlx, t_map *map, t_camera *camera);

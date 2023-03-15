@@ -9,19 +9,33 @@ typedef struct s_data
 	int endian;
 } t_data;
 
+int close(int keycode, t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+}
+
+void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char *dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	// 괄호 == offset
+	*(unsigned int *)dst = color;
+}
+
 int main(void)
 {
 	void *mlx;
+	void *win;
 	t_data img;
 
 	mlx = mlx_init();
+	win = mlx_new_window(mlx, 1920, 1080, "Hello 42 Seoul");
 	img.img = mlx_new_image(mlx, 1920, 1080);
-
-	/*
-	** image를 만들었다면, 우리는 `mlx_get_data_addr`을 불러올 수 있다.
-	** `bits_per_pixel`, `line_length`, `endian`의 주소를 보낸다.
-	** 그러고 나서 보내진 주소는 *현재 데이터 주소*를 위해 적절히 set 될 것이다.
-	*/
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								 &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
+	// mlx_key_hook(data.win, close, &vars);
+	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
+	mlx_loop(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 12:30:27 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:10:13 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	get_clr(t_point cur, t_point *s, t_point *f, t_point delta)
 // 	}
 // }
 
-static void	ft_isometric(int *x, int *y, int z)
+static void	isometric(int *x, int *y, int z)
 {
 	int	prev_x;
 	int	prev_y;
@@ -137,12 +137,69 @@ static void	ft_isometric(int *x, int *y, int z)
 	*x = (prev_x - prev_y) * cos(PI / 6);
 	*y = (prev_x + prev_y) * sin(PI / 6) - z;
 }
+
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+t_point *point(t_mlx *mlx, t_mlx *camera, t_point *p)
+{
+	p->x *= camera->zoom;
+	p->y *= camera->zoom;
+	p->y *= camera->zoom / camera->z_divisor;
+	p->x -= (map->width * camera->zoom) 2;
+	p->y -= (map->length * camera->zoom) / 2;
+	rotate_x(&p->y, &p->z, camera->alpha);
+	rotate_y(&p->x, &p->z, camera->beta);
+	rotate_x(&p->x, &p->y, camera->gamma);
+	if (camera->projection == ISOMETRIC)
+		isometric(&p->x, &p->y, &p->z);
+	p->x += (SCRN_WIDTH - SUB_SCRN_WIDTH) / 2 + SUB_SCRN_WIDTH + camera->x_offset;
+	p->y += SCRN_HEIGHT / 2 + camera->y_offset;
+	p->y += map->length * camera->zoom * 2 / 5;
+	return (p);	 
+}
+
+static void init_delta_and_step(t_point *px, t_point *py, t_point *delta, t_point *step)
+{
+	delta->x = get_abs(px->x - s->x);
+	delta->y = get_abs(py->y - px->y);
+}
+
+
+static void	draw_line(t_mlx *mlx, t_point *px, t_point *py)
+{
+	t_point delta;
+	t_point	step;
+	t_point	cur;
+	int		err[2];
+
+	init_delta_and_step(px, py, &delta, &step);
+	err[0] = delta.x - delta.y;
+	cur = *s;
+	while (cur.x != py->x || cur.y != py->y)
+	{
+		put_pixel(mlx, cur.x, cur.y, get_clr(cur, px, py, delta));
+		err[1] = err[0] * 2;
+		if (err[1] < delta.x)
+		{
+			err[0] += delta.x;
+			cur.y += step.y;
+		}
+		if (err[1] > -delta.y)
+		{
+			err[0] -= delta.y;
+			cur.x += step.x;
+		}
+	}
+	free(px);
+	px = NULL;
+	free(py);
+	py = NULL;
 }
 
 static void	draw_background(t_mlx *mlx)
@@ -166,9 +223,29 @@ static void	draw_background(t_mlx *mlx)
 ** line_length: 4000
 */
 
-void	draw(t_mlx *mlx, t_map *map)
+void	draw(t_mlx *mlx, t_map *map, t_camera *camera)
 {
 	int	x;
 	int	y;
+
 	draw_background(mlx);
+	y = -1;
+	while (++y < map->length)
+	{
+		x = -1;
+		while (++x < map->width)
+		{
+			if (x < map->width - 1)
+			{
+				draw_line(mlx, point(mlx, camera, init_point(x, y, map), \
+				point(mlx, camera, init_point(x + 1, y, map))));
+			}
+			if (y < map->length - 1)
+			{
+				draw_line(mlx, camera, point(mlx, init_point(x, y, map), \
+				point(mlx, camera, init_point(x, y + 1, map))));
+			}
+		}
+	}
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }

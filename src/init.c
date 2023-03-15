@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 08:55:01 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/15 12:02:30 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ void	init(t_mlx *mlx, t_map *map, t_camera *camera)
 	if (camera == NULL)
 		ft_puterror("Error: camera mallocate fail");
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, 1920, 1080, "mlx 42");
-	mlx->img = mlx_new_image(mlx->mlx, 1920, 1080);
-	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, \
+	mlx->win = mlx_new_window(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT, "mlx 42");
+	mlx->img = mlx_new_image(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT);
+	mlx->addr = (int *)mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, \
 	&mlx->line_length, &mlx->endian);
 	camera->alpha = 0;
 	camera->beta = 0;
 	camera->gamma = 0;
 	camera->x_offset = 0;
 	camera->y_offset = 0;//A < B ? A : B
-	camera->zoom = get_min((WIDTH - SUB_WIDTH) / map->width / 2, \
-	HEIGHT / map->length / 2);
+	camera->zoom = get_min((SCRN_WIDTH - SUB_SCRN_WIDTH) / map->width / 2, \
+	SCRN_HEIGHT / map->length / 2);
 	camera->z_divisor = 1;
 }

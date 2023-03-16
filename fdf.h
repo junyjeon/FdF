@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 15:15:34 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:04:12 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "lib/mlx/mlx.h"
+# include "key_macros.h"
 # include "math.h"
 # include <unistd.h>
 # include <fcntl.h>
@@ -86,14 +87,14 @@ typedef struct s_point
 
 void		fdf(char **argv);
 void		init(t_mlx *mlx, t_map *map, t_camera *camera);
-void		init_camera(t_map *map, t_camera *camera);
+void		init_camera(t_camera *camera);
 void		parse(t_map *map, char *filename);
 
 /* Algorithm */
 void		isometric(int *x, int *y, int z);
 void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
-t_point		*init_point(t_map *map, int x, int y);
+// t_point		*init_point(t_map *map, int x, int y);
 void		draw(t_mlx *mlx, t_map *map);
 //void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
@@ -106,7 +107,10 @@ void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
 void	ft_puterror(char *str);
-int		get_less(int a, int b);
+// int		get_less(int a, int b);
+
+/* key_hook */
+int	key_hook(int keycode, t_mlx *mlx);
 
 
 // void	draw_map(t_mlx *mlx);

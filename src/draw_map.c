@@ -6,63 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 15:15:28 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:44:46 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*
-** quadrant 1, 4, 5, 8(delta.x > delta.y): sample by x
-** quadrant 2, 3, 6, 7(delta.x < delta.y): sample by y
-*/
-
-// int width = abs(endPosition.X - startPosition.X);
-// int height = abs(endPosition.Y - startPosition.Y);
-
-// SetPixel(startPosition, InColor);
-// int x = startPosition.X;
-// int y = startPosition.Y;
-
-// int YValue = InEndPos.Y >= 0 ? -1 : 1;
-// int XValue = InEndPos.X >= 0 ? 1 : -1;
-
-// // 1,4,5,8 팔분면일 경우
-// if (width > height)
-// {
-// 	int det = (2 * height) - width; // 판별식
-// 	for (x = startPosition.X; x != endPosition.X; x += XValue)
-// 	{
-// 		if (det < 0)
-// 		{
-// 			det += 2 * height;
-// 		}
-// 		else
-// 		{
-// 			y += YValue;
-// 			det += (2 * height - 2 * width);
-// 		}
-// 		SetPixel(ScreenPoint(x, y), InColor);
-// 	}
-// }
-// // 2,3,6,7 팔분면일 경우
-// else
-// {
-// 	int det = (2 * width) - height; // 판별식
-// 	for (y = startPosition.Y; y != endPosition.Y; y += YValue)
-// 	{
-// 		if (det < 0)
-// 		{
-// 			det += 2 * width;
-// 		}
-// 		else
-// 		{
-// 			x += XValue;
-// 			det += (2 * width - 2 * height);
-// 		}
-// 		SetPixel(ScreenPoint(x, y), InColor);
-// 	}
-// }
 
 // static void	put_pixel(t_mlx *mlx, int x, int y, int color)
 // {
@@ -137,33 +85,6 @@ static void	draw_background(t_mlx *mlx)
 			img[i] = CLR_MAIN_SCRN_BG;
 	}
 }
-
-/*
-** bits per pixel: 32(4 bytes; int)
-** line_length: 4000
-*/
-
-/*
-algorithm Bresenham(x1, y1, x2, y2)
-{
-	x = x1;
-	y = y1;
-	dx = x2 - x1;
-	dy = y2 - y1;
-	F = 2 * dx - dy;
-	while (x <= x2)
-	{
-		put_pixel(x, y);
-		++x;
-		if (F < 0)
-			F = F + 2 * dy;
-		else
-		{
-			F = F + 2 * dy - 2 * dx;
-			++y;
-		}
-}
-*/
 
 void	draw(t_mlx *mlx, t_map *map)
 {

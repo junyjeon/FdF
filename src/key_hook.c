@@ -6,11 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:32 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 19:41:46 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:55:04 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "fdf.h"
+#include "fdf.h"
 
 //int	esc_key(t_mlx *mlx, int key, void *param)
 //{
@@ -61,3 +61,13 @@
 // 		exit(0);
 // 	return (0);
 // }
+
+int	key_hook(int keycode, t_mlx *mlx)
+{
+	if (keycode == KEY_ESCAPE)
+	{
+		mlx_destroy_window(mlx->mlx, mlx->win);
+		exit(0);
+	}
+	return (0);
+}

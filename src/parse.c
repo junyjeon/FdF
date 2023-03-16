@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 15:10:49 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:43:22 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	get_map(t_map *map, t_list *lst)
 		j = -1;
 		while (split[++j])
 		{
-			map->map[i][j] = ft_atoi(split[j]);//'\n'빼야됨
+			map->map[i][j] = ft_atoi(split[j]);
 			if (split[j])
 				free(split[j]);
 			set_map_z_min_max(map, i, j);

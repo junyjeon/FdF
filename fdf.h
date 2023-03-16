@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 17:04:12 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:21:18 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,22 @@ typedef struct s_point
 	int	color;
 }		t_point;
 
-void		fdf(char **argv);
-void		init(t_mlx *mlx, t_map *map, t_camera *camera);
-void		init_camera(t_camera *camera);
-void		parse(t_map *map, char *filename);
+void	fdf(char **argv);
+void	init(t_mlx *mlx, t_map *map, t_camera *camera);
+void	init_camera(t_camera *camera);
+void	parse(t_map *map, char *filename);
 
 /* Algorithm */
-void		isometric(int *x, int *y, int z);
-void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	isometric(int *x, int *y, int z);
+void	bresenham(t_mlx *mlx, int x1, int y1, int x2, int y2);
 
 // t_point		*init_point(t_map *map, int x, int y);
-void		draw(t_mlx *mlx, t_map *map);
+void	draw(t_mlx *mlx, t_map *map);
 //void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
 /* color */
-int get_color(t_point cur, t_point *s, t_point *f, t_point delta);
-int	get_default_color(int z, t_map *map);
+int 	get_color(t_point cur, t_point *s, t_point *f, t_point delta);
+int		get_default_color(int z, t_map *map);
 
 /* utils */
 void	rotate_x(int *y, int *z, double alpha);
@@ -110,7 +110,7 @@ void	ft_puterror(char *str);
 // int		get_less(int a, int b);
 
 /* key_hook */
-int	key_hook(int keycode, t_mlx *mlx);
+int		key_hook(int keycode, t_mlx *mlx);
 
 
 // void	draw_map(t_mlx *mlx);

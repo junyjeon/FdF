@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:21:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 17:27:42 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:03:47 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	isometric(int *x, int *y, int z)
 
 	prev_x = *x;
 	prev_y = *y;
-	*x = (prev_x - prev_y) * cos(0.5236);
-	*y = (prev_x + prev_y) * sin(0.5236) - z;
+	*x = (prev_x - prev_y) * cos(PI_DIVIDE_6);
+	*y = (prev_x + prev_y) * sin(PI_DIVIDE_6) - z;
 }

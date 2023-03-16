@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 17:21:18 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:03:40 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define CLR_FLAMINGO		0xEC4B27
 # define CLR_JAFFA			0xEF8633
 # define CLR_SAFFRON		0xF3AF3D
+
+/* PI */
+# define PI_DIVIDE_6 0.5236
 
 typedef struct s_mlx
 {

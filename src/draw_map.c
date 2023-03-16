@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 17:26:59 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:59:05 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,11 @@ void	draw(t_mlx *mlx, t_map *map)
 				isometric(&x, &y, map->map[x][y]);
 				bresenham(mlx, x, y, x + 1, y);
 			}
-			// draw_line(mlx, point(map, camera, init_point(map, x, y)), point(map, camera, init_point(map, x + 1, y)));
 			if (y < map->height - 1)
 			{
 				isometric(&x, &y, map->map[x][y]);
 				bresenham(mlx, x, y, x + 1, y);
 			}
-			// draw_line(mlx, point(map, camera, init_point(map, x, y)), point(map, camera, init_point(map, x, y + 1)));
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);

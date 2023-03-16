@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 22:00:44 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:15:28 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,6 @@
 ** quadrant 1, 4, 5, 8(delta.x > delta.y): sample by x
 ** quadrant 2, 3, 6, 7(delta.x < delta.y): sample by y
 */
-
-//int	get_clr(t_point cur, t_point *s, t_point *f, t_point delta)
-//{
-//	double	ratio;
-//	int		red;
-//	int		green;
-//	int		blue;
-
-//	if (cur.clr == f->clr)
-//		return (cur.clr);
-//	if (delta.x > delta.y)
-//		ratio = get_ratio(s->x, f->x, cur.x);
-//	else
-//		ratio = get_ratio(s->y, f->y, cur.y);
-//	red = process_lerp((f->clr >> 16) & 0xFF, (s->clr >> 16) & 0xFF, ratio);
-//	green = process_lerp((f->clr >> 8) & 0xFF, (s->clr >> 8) & 0xFF, ratio);
-//	blue = process_lerp(f->clr & 0xFF, s->clr & 0xFF, ratio);
-//	return ((red << 16) | (green << 8) | blue);
-//}
 
 // int width = abs(endPosition.X - startPosition.X);
 // int height = abs(endPosition.Y - startPosition.Y);
@@ -83,19 +64,84 @@
 // 	}
 // }
 
-static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
+// static void	put_pixel(t_mlx *mlx, int x, int y, int color)
+// {
+// 	int	i;
+
+// 	if ((SUB_SCRN_WIDTH <= x && x < SCRN_WIDTH) && 0 <= y && y < SCRN_HEIGHT)
+// 	{
+// 		i = (x * mlx->bits_per_pixel / 8) + (y * mlx->line_length);
+// 		mlx->addr[i] = color;
+// 		mlx->addr[++i] = color >> 8;
+// 		mlx->addr[++i] = color >> 16;
+// 	}
+// }
+
+// static void init_delta(t_point *px, t_point *py, t_point *delta, t_point *step)
+// {
+// 	delta->x = abs(py->x - px->x);
+// 	delta->y = abs(py->y - px->y);
+// 	if (px->x < py->x)
+// 		step->x = 1;
+// 	else
+// 		step->x = -1;
+// 	if (px->y < py->y)
+// 		step->y = 1;
+// 	else
+// 		step->y = -1;
+// }
+
+// static void	draw_line(t_mlx *mlx, t_point *s, t_point *f)
+// {
+// 	t_point	delta;
+// 	t_point	step;
+// 	t_point	cur;
+// 	int		err[2];
+
+// 	init_delta(s, f, &delta, &step);
+// 	err[0] = delta.x - delta.y;
+// 	cur = *s;
+// 	while (cur.x != f->x || cur.y != f->y)
+// 	{
+// 		put_pixel(mlx, cur.x, cur.y, get_color(cur, s, f, delta));
+// 		err[1] = err[0] * 2;
+// 		if (err[1] < delta.x)
+// 		{
+// 			err[0] += delta.x;
+// 			cur.y += step.y;
+// 		}
+// 		if (err[1] > -delta.y)
+// 		{
+// 			err[0] -= delta.y;
+// 			cur.x += step.x;
+// 		}
+// 	}
+// 	free(s);
+// 	s = NULL;
+// 	free(f);
+// 	f = NULL;
+// }
+
+static void	draw_background(t_mlx *mlx)
 {
-	delta->x = abs(py->x - px->x);
-	delta->y = abs(py->y - px->y);
-	if (px->x < py->x)
-		step->x = 1;
-	else
-		step->x = -1;
-	if (px->y < py->y)
-		step->y = 1;
-	else
-		step->y = -1;
+	int	i;
+	int	*img;
+
+	img = (int *)(mlx->addr);
+	i = -1;
+	while (++i < SCRN_WIDTH * SCRN_WIDTH)
+	{
+		if (i % SCRN_WIDTH < SUB_SCRN_WIDTH)
+			img[i] = CLR_SUB_SCRN_BG;
+		else
+			img[i] = CLR_MAIN_SCRN_BG;
+	}
 }
+
+/*
+** bits per pixel: 32(4 bytes; int)
+** line_length: 4000
+*/
 
 /*
 algorithm Bresenham(x1, y1, x2, y2)
@@ -119,59 +165,7 @@ algorithm Bresenham(x1, y1, x2, y2)
 }
 */
 
-static void	bresenham(t_mlx *mlx, t_point *px, t_point *py)
-{
-	t_point	delta;
-	t_point	step;
-	t_point	cur;
-	int		err[2];
-
-	init_delta(px, py, &delta, &step);
-	err[0] = delta.x - delta.y;
-	cur = *px;
-	while (cur.x != py->x || cur.y != py->y)
-	{
-		my_mlx_pixel_put(mlx, x, y, create_trgb(0, r, g, b));
-		err[1] = err[0] * 2;
-		if (err[1] < delta.x)
-		{
-			err[0] += delta.x;
-			cur.y += step.y;
-		}
-		if (err[1] > -delta.y)
-		{
-			err[0] -= delta.y;
-			cur.x += step.x;
-		}
-	}
-	free(px);
-	px = NULL;
-	free(py);
-	py = NULL;
-}
-
-static void	draw_background(t_mlx *mlx)
-{
-	int	i;
-	int	*img;
-
-	img = (int *)(mlx->addr);
-	i = -1;
-	while (++i < SCRN_WIDTH * SCRN_WIDTH)
-	{
-		if (i % SCRN_WIDTH < SUB_SCRN_WIDTH)
-			img[i] = CLR_SUB_SCRN_BG;
-		else
-			img[i] = CLR_MAIN_SCRN_BG;
-	}
-}
-
-/*
-** bits per pixel: 32(4 bytes; int)
-** line_length: 4000
-*/
-
-void	draw(t_mlx *mlx, t_map *map, t_camera *camera)
+void	draw(t_mlx *mlx, t_map *map)
 {
 	int	x;
 	int	y;
@@ -183,16 +177,16 @@ void	draw(t_mlx *mlx, t_map *map, t_camera *camera)
 		x = -1;
 		while (++x < map->width)
 		{
-			int color;
-
-			double r = (double)(SCRN_WIDTH - x) / (SCRN_WIDTH - 1);
-			double g = (double)(y) / (SCRN_HEIGHT - 1);
-			double b = 1;
-			color = create_trgb(0, r, g, b);
 			if (x < map->width - 1)
-				bresenham(mlx, camera, point(mlx, camera, init_point(x, y, map), point(mlx, camera, init_point(x + 1, y, map))));
+			{
+				my_mlx_pixel_put(mlx, x, y, CLR_TEXT);
+			}
+			// draw_line(mlx, point(map, camera, init_point(map, x, y)), point(map, camera, init_point(map, x + 1, y)));
 			if (y < map->height - 1)
-				bresenham(mlx, camera, point(mlx, init_point(x, y, map), point(mlx, camera, init_point(x, y + 1, map))));
+			{
+				my_mlx_pixel_put(mlx, x, y, CLR_TEXT);
+			}
+			// draw_line(mlx, point(map, camera, init_point(map, x, y)), point(map, camera, init_point(map, x, y + 1)));
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);

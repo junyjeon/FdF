@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 21:59:34 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 14:42:50 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_point	*point(t_map *map, t_camera *camera, t_point *p)
 	return (p);
 }
 
-t_point	*init_point(int x, int y, t_map *map, int index)
+t_point	*init_point(t_map *map, int x, int y)
 {
 	t_point	*point;
 	int		i;
@@ -42,7 +42,11 @@ t_point	*init_point(int x, int y, t_map *map, int index)
 	point->x = x;
 	point->y = y;
 	i = y * map->width + x;
-	point->z = map->map[index][i];
+	point->z = (map->arr_z)[i];
+	if ((map->arr_color)[i] == -1)
+		point->color = get_default_color(point->z, map);
+	else
+		point->color = map->arr_color[i];
 	return (point);
 }
 
@@ -63,15 +67,21 @@ void	init(t_mlx *mlx, t_map *map, t_camera *camera)
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	if (mlx == NULL)
 		ft_puterror("Error: mlx mallocate fail");
-	map = (t_map *)malloc(sizeof(t_map));
-	if (map == NULL)
-		ft_puterror("Error: map mallocate fail");
-	camera = (t_camera *)malloc(sizeof(t_camera));
-	if (camera == NULL)
-		ft_puterror("Error: camera mallocate fail");
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT, "mlx 42");
 	mlx->img = mlx_new_image(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT);
 	mlx->addr = (int *)mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, \
 	&mlx->line_length, &mlx->endian);
+	map = (t_map *)malloc(sizeof(t_map));
+	if (map == NULL)
+		ft_puterror("Error: map mallocate fail");
+	map->arr_color = (int *)malloc(map->width * map->height * sizeof(int));
+	if (map->arr_color == NULL)
+		ft_puterror("Error: arr_color mallocate fail");
+	map->arr_z = (int *)malloc(map->width * map->height * sizeof(int));
+	if (map->arr_z == NULL)
+		ft_puterror("Error: arr_z mallocate fail");
+	camera = (t_camera *)malloc(sizeof(t_camera));
+	if (camera == NULL)
+		ft_puterror("Error: camera mallocate fail");
 }

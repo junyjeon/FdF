@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/15 21:55:33 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:15:34 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@
 # define SUB_SCRN_WIDTH 1680
 
 /* color */
-# define CLR_MAIN_SCRN_BG 0x222222
-# define CLR_SUB_SCRN_BG 0x1E1E1E
+# define CLR_TEXT			0xEAEAEA
+# define CLR_MAIN_SCRN_BG	0x222222
+# define CLR_SUB_SCRN_BG	0x1E1E1E
+# define CLR_DISCO			0x9A1F6A
+# define CLR_BRICK_RED		0xC2294E
+# define CLR_FLAMINGO		0xEC4B27
+# define CLR_JAFFA			0xEF8633
+# define CLR_SAFFRON		0xF3AF3D
 
 typedef struct s_mlx
 {
@@ -46,6 +52,10 @@ typedef struct s_map
 	int	width;
 	int	length;
 	int	height;
+	int	*arr_color;
+	int	*arr_z;
+	int	z_max;
+	int	z_min;
 }		t_map;
 
 typedef enum e_projection
@@ -80,13 +90,16 @@ void		init_camera(t_map *map, t_camera *camera);
 void		parse(t_map *map, char *filename);
 
 /* Algorithm */
-static void	bresenham(t_mlx *mlx, t_point *px, t_point *py);
 void		isometric(int *x, int *y, int z);
 void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
-t_point		*point(t_map *map, t_camera *camera, t_point *p);
-void		draw(t_mlx *mlx, t_map *map, t_camera *camera);
+t_point		*init_point(t_map *map, int x, int y);
+void		draw(t_mlx *mlx, t_map *map);
 //void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+
+/* color */
+int get_color(t_point cur, t_point *s, t_point *f, t_point delta);
+int	get_default_color(int z, t_map *map);
 
 /* utils */
 void	rotate_x(int *y, int *z, double alpha);

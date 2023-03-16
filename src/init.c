@@ -6,13 +6,13 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 17:28:32 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:29:46 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	init(t_mlx *mlx, t_map *map, t_camera *camera)
+void	init(t_mlx *mlx, t_map *map)
 {
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	if (mlx == NULL)

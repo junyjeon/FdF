@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 18:03:40 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:08:04 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ typedef struct s_point
 }		t_point;
 
 void	fdf(char **argv);
-void	init(t_mlx *mlx, t_map *map, t_camera *camera);
-void	init_camera(t_camera *camera);
+void	init(t_mlx *mlx, t_map *map);
 void	parse(t_map *map, char *filename);
 
 /* Algorithm */

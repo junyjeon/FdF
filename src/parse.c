@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 16:43:22 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:46:19 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	set_map(t_map *map, int fd)
 	lst = (t_list **)malloc(sizeof(t_list *));
 	while (line)
 	{
-		ft_lstadd_back(lst, ft_lstnew((void *)line));
+		ft_lstadd_back(lst, ft_lstnew(line));
 		line = get_next_line(fd);
 	}
 	map->width = ft_strlen((*lst)->content);

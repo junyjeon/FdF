@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 17:29:46 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/14 05:50:39 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/17 18:42:50 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,11 @@ BONUS_OBJ	= 	$(BONUS_SRC:.c=.o)
 
 all :		$(NAME)
 
-$(NAME) : mandatory
+$(NAME) : $(OBJ)
+	@$(CC) $(CFLAGS) $^ -o $@
 
-mandatory : $(NAME)($(OBJ))
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
 bonus : $(NAME)($(OBJ) $(BONUS_OBJ))
 

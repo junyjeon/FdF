@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/16 17:59:05 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:36:09 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	draw_background(t_mlx *mlx)
 
 	img = (int *)(mlx->addr);
 	i = -1;
-	while (++i < SCRN_WIDTH * SCRN_WIDTH)
+	while (++i < SCRN_WIDTH * SCRN_HEIGHT)
 	{
 		if (i % SCRN_WIDTH < SUB_SCRN_WIDTH)
 			img[i] = CLR_SUB_SCRN_BG;

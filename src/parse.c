@@ -6,7 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/18 21:37:39 by junyojeo         ###   ########.fr       */
+=======
+/*   Updated: 2023/03/18 11:47:55 by junyojeo         ###   ########.fr       */
+>>>>>>> 70d53e4b429eb9cfce89b9e16edb985f7456d229
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +60,12 @@ static void	set_map(t_map *map, int fd)
 	char	*line;
 
 	line = get_next_line(fd);
+<<<<<<< HEAD
 	lst = NULL;
+=======
+	lst = (t_list **)malloc(sizeof(t_list *)); // lst->next가  null인게 보장 안됨...
+	(*lst)->next = NULL;
+>>>>>>> 70d53e4b429eb9cfce89b9e16edb985f7456d229
 	while (line)
 	{
 		ft_lstadd_back(&lst, ft_lstnew(line));

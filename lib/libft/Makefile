@@ -6,14 +6,14 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 17:29:46 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/17 18:42:50 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/18 13:18:10 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libft.a
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra -Werror -g2
 
 SRC			=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 				ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_strncmp.c \
@@ -30,11 +30,9 @@ BONUS_OBJ	= 	$(BONUS_SRC:.c=.o)
 
 all :		$(NAME)
 
-$(NAME) : $(OBJ)
-	@$(CC) $(CFLAGS) $^ -o $@
+$(NAME) : mandatory
 
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $^ -o $@
+mandatory : $(NAME)($(OBJ))
 
 bonus : $(NAME)($(OBJ) $(BONUS_OBJ))
 

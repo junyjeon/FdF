@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/17 18:46:19 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 14:46:01 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@ static void	get_map(t_map *map, t_list *lst)
 
 static void	set_map(t_map *map, int fd)
 {
-	t_list	**lst;
+	t_list	*lst;
 	char	*line;
 
 	line = get_next_line(fd);
-	lst = (t_list **)malloc(sizeof(t_list *));
+	lst = NULL;
 	while (line)
 	{
-		ft_lstadd_back(lst, ft_lstnew(line));
+		ft_lstadd_back(&lst, ft_lstnew(line));
 		line = get_next_line(fd);
 	}
-	map->width = ft_strlen((*lst)->content);
-	map->height = ft_lstsize(*lst);
-	get_map(map, *lst);
-	ft_lstclear(lst, free);
+	map->width = ft_strlen(lst->content);
+	map->height = ft_lstsize(lst);
+	get_map(map, lst);
+	ft_lstclear(&lst, free);
 }
 
 static int	file_check(char *filename)

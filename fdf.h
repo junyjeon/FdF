@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/17 18:08:04 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:35:13 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*win;
 	void	*img;
-	int		*addr;
+	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -62,24 +62,6 @@ typedef struct s_map
 	int	z_min;
 }		t_map;
 
-typedef enum e_projection
-{
-	ISOMETRIC,
-	PARALLEL
-}	t_projection;
-
-typedef struct s_camera
-{
-	t_projection	projection;
-	int				alpha;
-	int				beta;
-	int				gamma;
-	int				x_offset;
-	int				y_offset;
-	int				zoom;
-	int				z_divisor;
-}		t_camera;
-
 typedef struct s_point
 {
 	int	x;
@@ -88,28 +70,23 @@ typedef struct s_point
 	int	color;
 }		t_point;
 
+/* function */
 void	fdf(char **argv);
-void	init(t_mlx *mlx, t_map *map);
+
+void	init(t_mlx *mlx);
+t_point	init_point(int x, int y, int z);
+
 void	parse(t_map *map, char *filename);
 
-/* Algorithm */
-void	isometric(int *x, int *y, int z);
-void	bresenham(t_mlx *mlx, int x1, int y1, int x2, int y2);
-
-// t_point		*init_point(t_map *map, int x, int y);
 void	draw(t_mlx *mlx, t_map *map);
-//void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-
-/* color */
-int 	get_color(t_point cur, t_point *s, t_point *f, t_point delta);
-int		get_default_color(int z, t_map *map);
+void	pixel_put(t_mlx *mlx, t_point p);
+void	bresenham(t_mlx *mlx, t_point start, t_point end);
 
 /* utils */
 void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
 void	ft_puterror(char *str);
-// int		get_less(int a, int b);
 
 /* key_hook */
 int		key_hook(int keycode, t_mlx *mlx);

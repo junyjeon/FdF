@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 20:52:18 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:52:47 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_map
 {
 	int	**map;
 	int	width;
-	int	length;
 	int	height;
 	int	z_max;
 	int	z_min;
@@ -77,9 +76,10 @@ t_point	*init_point(int x, int y, int z);
 void	parse(t_map *map, char *filename);
 
 void	draw(t_mlx *mlx, t_map *map);
-void	pixel_put(t_mlx *mlx, t_point *p);
+void	pixel_put(t_mlx *mlx, t_point *p, int color);
 void	bresenham(t_mlx *mlx, t_point *start, t_point *end);
-int		gradient(t_point start, t_point end, t_point x);
+int		gradient(t_point *start, t_point *end, t_point x, t_point delta);
+int		get_default_clr(t_map *map, int i, int j);
 
 /* utils */
 void	rotate_x(int *y, int *z, double alpha);

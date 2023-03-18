@@ -6,17 +6,17 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 21:02:09 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:42:42 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	pixel_put(t_mlx *mlx, t_point *p)
+void	pixel_put(t_mlx *mlx, t_point *p, int color)
 {
 	char	*dst;
 
-	dst = mlx->addr + (p->y * mlx->line_length) + p->x * 4;
+	dst = mlx->addr + (p->y * mlx->line_length) + p->x * (mlx->bits_per_pixel / 8);
 	*(unsigned int *)dst = p->color;
 }
 
@@ -33,17 +33,24 @@ static t_point	*isometric(t_point *dot)
 	return (dot);
 }
 
-static void	draw_background(t_mlx *mlx)
+static void	draw_background(t_mlx *mlx, t_map *map)
 {
-	int		x;
-	int		y;
+	int		i;
+	int		j;
 
-	y = -1;
-	while (++y < SCRN_HEIGHT)
+	j = -1;
+	while (++j < SCRN_HEIGHT)
 	{
-		x = -1;
-		while (++x < SCRN_WIDTH)
-			pixel_put(mlx, init_point(x, y, 0));
+		i = -1;
+		while (++i < SCRN_WIDTH)
+		{
+			if (i < map->width - 1)
+				pixel_put(mlx, init_point(i, j, map->map[j][i]), \
+				get_default_clr(map, i, j));
+			if (j < map->height - 1)
+				pixel_put(mlx, init_point(i, j, map->map[j][i]), \
+				get_default_clr(map, i, j));
+		}
 	}
 }
 
@@ -52,7 +59,7 @@ void	draw(t_mlx *mlx, t_map *map)
 	int	i;
 	int	j;
 
-	draw_background(mlx);
+	draw_background(mlx, map);
 	j = -1;
 	//while (++j < map->height)
 	//{

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:21:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 20:45:26 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:47:00 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ static void	draw_vertical(t_mlx *mlx, t_point *start, t_point *end)
 		while (++i < end->y && i < SCRN_HEIGHT && \
 		(end->x >= 0 && end->x < SCRN_HEIGHT))
 			if (i >= 0)
-			{
-				//start->x, i;
-				pixel_put(mlx, init_point(start->x, i, 0));
-			}
+				pixel_put(mlx, init_point(start->x, i, 0), gradient(start, end, );
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:02:54 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 18:43:32 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:52:32 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ static int	lerp(int s, int f, double ratio)
 	return ((int)((ratio) * s + (1 - ratio) * f));
 }
 
-int	gradient(t_point start, t_point end, t_point x)
+int	gradient(t_point *start, t_point *end, t_point x, t_point delta)
 {
 	double	ratio;
 	int		red;
 	int		green;
 	int		blue;
 
-	if (x.color == end.color)
+	if (x.color == start->color)
 		return (x.color);
-	ratio = mag(start.x, end.x, x.x);
-	red = lerp((end.color >> 16) & 0xFF, (start.color >> 16) & 0xFF, ratio);
-	green = lerp((end.color >> 8) & 0xFF, (start.color >> 8) & 0xFF, ratio);
-	blue = lerp(end.color & 0xFF, start.color & 0xFF, ratio);
+	if (delta.x > delta.y)
+		ratio = mag(start->x, end->x, x->x);
+	else
+		ratio = mag(start->y, end->y, x->y);
+	red = lerp((end->color >> 16) & 0xFF, (start->color >> 16) & 0xFF, ratio);
+	green = lerp((end->color >> 8) & 0xFF, (start->color >> 8) & 0xFF, ratio);
+	blue = lerp(end->color & 0xFF, start->color & 0xFF, ratio);
 	return ((red << 16) | (green << 8) | blue);
 }
 

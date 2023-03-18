@@ -6,13 +6,13 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 14:46:01 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:01:45 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	set_map_z_min_max(t_map *map, int i, int j)
+static void	set_map_length(t_map *map, int i, int j)
 {
 	if (map->z_max < map->map[i][j])
 		map->z_max = map->map[i][j];
@@ -42,7 +42,7 @@ static void	get_map(t_map *map, t_list *lst)
 			map->map[i][j] = ft_atoi(split[j]);
 			if (split[j])
 				free(split[j]);
-			set_map_z_min_max(map, i, j);
+			set_map_length(map, i, j);
 		}
 		lst = lst->next;
 		free(split);
@@ -64,6 +64,8 @@ static void	set_map(t_map *map, int fd)
 	}
 	map->width = ft_strlen(lst->content);
 	map->height = ft_lstsize(lst);
+	map->z_max = -2147483648;
+	map->z_min = 2147483647;
 	get_map(map, lst);
 	ft_lstclear(&lst, free);
 }

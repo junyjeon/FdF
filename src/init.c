@@ -6,22 +6,23 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 17:32:42 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/18 20:54:25 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	init_point(int x, int y, int z)
+t_point	*init_point(int x, int y, int z)
 {
-	t_point	point;
+	t_point	*point;
 
 	rotate_x(&y, &z, PI_DIVIDE_6);
 	rotate_y(&x, &z, PI_DIVIDE_6);
 	rotate_z(&x, &y, PI_DIVIDE_6);
-	point.x = x;
-	point.y = y;
-	point.z = z;
+	point = (t_point *)malloc(sizeof(t_point));
+	point->x = x;
+	point->y = y;
+	point->z = z;
 	return (point);
 }
 

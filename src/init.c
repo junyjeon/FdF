@@ -6,23 +6,24 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 21:06:02 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:41:13 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	*init_point(int x, int y, int z)
+t_point	*init_point(t_map *map, int x, int y)
 {
 	t_point	*point;
 
-	rotate_x(&y, &z, PI_DIVIDE_6);
-	rotate_y(&x, &z, PI_DIVIDE_6);
+	rotate_x(&y, &map->map[x][y], PI_DIVIDE_6);
+	rotate_y(&x, &map->map[x][y], PI_DIVIDE_6);
 	rotate_z(&x, &y, PI_DIVIDE_6);
 	point = (t_point *)malloc(sizeof(t_point));
 	point->x = x;
 	point->y = y;
-	point->z = z;
+	point->z = map->map[x][y];
+	point->color = get_default_color(map, map->map[x][y]);
 	return (point);
 }
 

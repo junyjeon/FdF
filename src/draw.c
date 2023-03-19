@@ -6,17 +6,17 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/18 21:42:42 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:40:49 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	pixel_put(t_mlx *mlx, t_point *p, int color)
+void	pixel_put(t_mlx *mlx, t_point *p)
 {
 	char	*dst;
 
-	dst = mlx->addr + (p->y * mlx->line_length) + p->x * (mlx->bits_per_pixel / 8);
+	dst = mlx->addr + (p->y * mlx->line_length) + p->x * 4;
 	*(unsigned int *)dst = p->color;
 }
 
@@ -45,11 +45,9 @@ static void	draw_background(t_mlx *mlx, t_map *map)
 		while (++i < SCRN_WIDTH)
 		{
 			if (i < map->width - 1)
-				pixel_put(mlx, init_point(i, j, map->map[j][i]), \
-				get_default_clr(map, i, j));
+				pixel_put(mlx, init_point(map, i, j));
 			if (j < map->height - 1)
-				pixel_put(mlx, init_point(i, j, map->map[j][i]), \
-				get_default_clr(map, i, j));
+				pixel_put(mlx, init_point(map, i, j));
 		}
 	}
 }

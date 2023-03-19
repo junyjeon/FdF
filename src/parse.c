@@ -6,11 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/18 21:37:39 by junyojeo         ###   ########.fr       */
-=======
-/*   Updated: 2023/03/18 11:47:55 by junyojeo         ###   ########.fr       */
->>>>>>> 70d53e4b429eb9cfce89b9e16edb985f7456d229
+/*   Updated: 2023/03/19 20:44:40 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +52,24 @@ static void	get_map(t_map *map, t_list *lst)
 
 static void	set_map(t_map *map, int fd)
 {
-	t_list	*lst;
+	t_list	**lst;
+	t_list	*tmp;
 	char	*line;
 
+	lst = (t_list **)malloc(sizeof(t_list *));
+	*lst = NULL;
 	line = get_next_line(fd);
-<<<<<<< HEAD
-	lst = NULL;
-=======
-	lst = (t_list **)malloc(sizeof(t_list *)); // lst->next가  null인게 보장 안됨...
-	(*lst)->next = NULL;
->>>>>>> 70d53e4b429eb9cfce89b9e16edb985f7456d229
 	while (line)
 	{
-		ft_lstadd_back(&lst, ft_lstnew(line));
+		ft_lstadd_back(lst, ft_lstnew(line));
 		line = get_next_line(fd);
 	}
-	map->width = ft_strlen(lst->content);
-	map->height = ft_lstsize(lst);
+	map->width = ft_strlen((*lst)->content);
+	map->height = ft_lstsize(*lst);
 	map->z_max = -2147483648;
 	map->z_min = 2147483647;
-	get_map(map, lst);
-	ft_lstclear(&lst, free);
+	get_map(map, *lst);
+	ft_lstclear(lst, free);
 }
 
 static int	file_check(char *filename)

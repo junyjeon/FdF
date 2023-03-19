@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 17:29:46 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/18 13:18:10 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/19 20:30:40 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ BONUS_SRC	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 OBJ			=	$(SRC:.c=.o)
 BONUS_OBJ	= 	$(BONUS_SRC:.c=.o)
 
-all :		$(NAME)
+all :	$(NAME)
 
 $(NAME) : mandatory
 

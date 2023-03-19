@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 17:43:40 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/14 03:25:12 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 05:11:36 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static char	*buf_read(int fd, char *buf, char *save)
 			break ;
 		if (!save)
 		{
-			save = ft_strdup2("");
+			save = ft_strdup("");
 			save[0] = '\0';
 		}
 		tmp = save;
-		save = ft_strjoin2(tmp, buf);
+		save = ft_strjoin(tmp, buf);
 		free(tmp);
-		if (ft_strchr2(buf, '\n'))
+		if (ft_strchr(buf, '\n'))
 			break ;
 	}
 	return (save);
@@ -55,7 +55,7 @@ static char	*split_idx(char **save, char *line)
 		i++;
 	if ((*save)[i] == '\n')
 		i++;
-	line = ft_substr2((*save), 0, i);
+	line = ft_substr((*save), 0, i);
 	if (!(*save)[i])
 	{
 		free(*save);
@@ -63,7 +63,7 @@ static char	*split_idx(char **save, char *line)
 		return (line);
 	}
 	tmp = *save;
-	*save = ft_substr2(tmp, i, ft_strlen2(*save) - i);
+	*save = ft_substr(tmp, i, ft_strlen(*save) - i);
 	free(tmp);
 	return (line);
 }

@@ -6,13 +6,13 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 17:44:50 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/13 18:11:11 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 05:11:34 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen2(const char *str)
+size_t	ft_strlen(const char *str)
 {	
 	size_t	i;
 
@@ -23,7 +23,7 @@ size_t	ft_strlen2(const char *str)
 	return (i);
 }
 
-char	*ft_strchr2(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
@@ -36,7 +36,7 @@ char	*ft_strchr2(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup2(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	s_len;
 	char	*dst;
@@ -46,7 +46,7 @@ char	*ft_strdup2(const char *s1)
 		dst = (char *)malloc(sizeof(char) * 1);
 		return (dst);
 	}
-	s_len = ft_strlen2(s1);
+	s_len = ft_strlen(s1);
 	dst = (char *)malloc(sizeof(char) * s_len + 1);
 	if (!dst)
 		return (0);
@@ -56,15 +56,15 @@ char	*ft_strdup2(const char *s1)
 	return (dst);
 }
 
-char	*ft_substr2(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	s_len;
 	char	*str;
 
-	s_len = ft_strlen2(s);
+	s_len = ft_strlen(s);
 	if (start >= s_len)
-		return (ft_strdup2(""));
+		return (ft_strdup(""));
 	str = (char *)malloc(sizeof(char) * (s_len + 1));
 	if (!str)
 		return (0);
@@ -78,13 +78,13 @@ char	*ft_substr2(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strjoin2(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	int		i;
 	int		j;
 
-	str = (char *)malloc(sizeof(char) * (ft_strlen2(s1) + ft_strlen2(s2) + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == NULL)
 		return (0);
 	if (s1)

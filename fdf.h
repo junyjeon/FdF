@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/19 20:41:26 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 05:41:20 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ typedef struct s_mlx
 	int		endian;
 }		t_mlx;
 
+typedef struct s_point
+{
+	int	z;
+	int	color;
+}		t_point;
+
 typedef struct s_map
 {
-	int	**map;
-	int	width;
-	int	height;
-	int	z_max;
-	int	z_min;
+	t_point	**dot;
+	int		width;
+	int		height;
 }		t_map;
 
 typedef struct s_point
@@ -70,15 +74,13 @@ typedef struct s_point
 /* function */
 void	fdf(char **argv);
 
-void	init(t_mlx *mlx);
+void	init(t_mlx *mlx, char *argv);
 t_point	*init_point(t_map *map, int x, int y);
 
 void	parse(t_map *map, char *filename);
 
 void	draw(t_mlx *mlx, t_map *map);
-void	pixel_put(t_mlx *mlx, t_point *p);
 //void	bresenham(t_mlx *mlx, t_map *map, t_point *start, t_point *end);
-int		get_default_color(t_map *map, int z);
 
 /* utils */
 void	rotate_x(int *y, int *z, double alpha);

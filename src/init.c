@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/19 20:41:13 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 04:50:02 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ t_point	*init_point(t_map *map, int x, int y)
 	return (point);
 }
 
-void	init(t_mlx *mlx)
+
+void	init(t_mlx *mlx, char *argv)
 {
+	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT, "mlx 42");
+	mlx->win = mlx_new_window(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT, argv);
 	mlx->img = mlx_new_image(mlx->mlx, SCRN_WIDTH, SCRN_HEIGHT);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, \
 	&mlx->line_length, &mlx->endian);

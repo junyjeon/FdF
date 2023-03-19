@@ -6,47 +6,48 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/20 05:41:54 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 05:56:31 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void get_color()
+static void	set_map_color_dot(t_map *map, char *line, int height)
 {
+	int		j;
+	char	**split;
+	char	*color;
 
+	split = ft_split(line, ' ');
+	if (!split)
+		ft_puterror("Error: split mallocate fail");
+	j = -1;
+	while (split[++j])
+	{
+		color = ft_strchr(split[j], ',');
+		if (color)
+			map->dot[(map->width * height) + j]->color = (*color) + 1;
+		else
+			map->dot[(map->width * height) + j]->color = 0x00FFFFFF;
+		map->dot[(map->width * height) + j]->z = ft_atoi(split[j]);
+		free(split[j]);
+	}
+	free(split[j]);
 }
 
 static void	set_map(t_map *map, int fd)
 {
-	int		i;
-	int		j;
+	int		height;
 	char	*line;
-	char	**split;
-	char	*color;
 
 	map->dot = (t_point **)malloc(sizeof(t_point *) * map->height * map->width); 
 	if (map->dot)
 		ft_puterror("Error: map->map mallocte fail");
-	i = -1;
-	while (++i < map->height)
+	height = -1;
+	while (++height < map->height)
 	{
 		line = get_next_line(fd);
-		split = ft_split(line, ' ');
-		if (!split)
-			ft_puterror("Error: split mallocate fail");
-		j = -1;
-		while (split[++j])
-		{
-			color = ft_strchr(split[j], ',');
-			if (color)
-				map->dot[(map->width * i) + j]->color = color + 1;
-			else
-				map->dot[(map->width * i) + j]->color = 0x00FFFFFF;
-			map->dot[(map->width * i) + j]->z = ft_atoi(split[j]);
-			free(split[j]);
-		}
-		free(split[j]);
+		set_map_color_dot(map, line, height);
 		free(line);
 	}
 }
@@ -93,5 +94,3 @@ void	parse(t_map *map, char *argv)
 		ft_puterror("Error: map size zero");
 	close(fd);
 }
-
-	

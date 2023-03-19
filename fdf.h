@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/20 05:41:20 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 05:45:20 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,6 @@ typedef struct s_map
 	int		width;
 	int		height;
 }		t_map;
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-	int	z;
-	int	color;
-}		t_point;
 
 /* function */
 void	fdf(char **argv);

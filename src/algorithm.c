@@ -6,55 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:21:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/19 20:40:48 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 09:19:18 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "fdf.h"
-
-//static void	draw_vertical(t_mlx *mlx, t_map *map, t_point *start, t_point *end)
-//{
-//	int	i;
-
-//	if (end->y > start->y)
-//	{
-//		i = start->y - 1;
-//		while (++i < end->y && i < SCRN_HEIGHT && \
-//		(end->x >= 0 && end->x < SCRN_HEIGHT))
-//			if (i >= 0)
-//				pixel_put(mlx, init_point(map, start->x, i, map->map[start->x][i]));
-//	}
-//	else
-//	{
-//		i = end->y - 1;
-//		while (++i < start->y && i < SCRN_HEIGHT && \
-//		(end->x >= 0 && end->x < SCRN_HEIGHT))
-//			if (i >= 0)
-//				pixel_put(mlx, init_point(map, start->x, i, map->map[start->x][i]));
-//	}
-//}
-
-//static void	draw_horizon(t_mlx *mlx, t_map *map, t_point *start, t_point *end)
-//{
-//	int	i;
-
-//	if (end->x > start->x)
-//	{
-//		i = start->x - 1;
-//		while (++i < end->x && i < SCRN_HEIGHT && \
-//		(end->y >= 0 && end->y < SCRN_HEIGHT))
-//			if (i >= 0)
-//				pixel_put(mlx, init_point(map, start->y, i, map->map[start->y][i]));
-//	}
-//	else
-//	{
-//		i = end->x - 1;
-//		while (++i < start->x && i < SCRN_HEIGHT && \
-//		(end->y >= 0 && end->y < SCRN_HEIGHT))
-//			if (i >= 0)
-//				pixel_put(mlx, init_point(map, start->y, i, map->map[start->y][i]));
-//	}
-//}
+#include "fdf.h"
 
 //static void	less_one(t_mlx *mlx, t_map *map, t_point *start, t_point *end)
 //{
@@ -112,18 +68,55 @@
 //	}
 //}
 
-//void	bresenham(t_mlx *mlx, t_map *map, t_point *start, t_point *end)
-//{
-//	int	i;
+static void	draw_horizon(t_mlx *mlx, t_map *map, t_point *start, t_point *end)
+{
+	int	i;
 
-//	start->color = 0x00FFFFFF;
-//	end->color = 0x00FFFFFF;
-//	if (end->x - start->x == 0)
-//		draw_vertical(mlx, map, start, end);
-//	else if (end->y - start->y == 0)
-//		draw_horizon(mlx, map, start, end);
-//	else if (abs(end->y - start->x) < abs(end->x - start->x))
-//		less_one(mlx, map, start, end);
-//	else
-//		more_one(mlx, map, start, end);
-//}
+	i = start->x - 1;
+	while (++i < end->x && i != SCRN_WIDTH)
+		pixel_put(mlx, i, start->y, start->color);
+}
+
+static void	draw_vertical(t_mlx *mlx, t_point *start, t_point *end)
+{
+	int	i;
+
+	i = start->y - 1;
+	while (++i < end->y && i != SCRN_HEIGHT)
+		pixel_put(mlx, start->x, i, start->color);
+}
+
+void	bresenham(t_mlx *mlx, t_point *start, t_point *end)
+{
+	if (end->y - start->y == 0)
+		draw_horizon(mlx, start, end);
+	else if (end->x - start->x == 0)
+		draw_vertical(mlx, start, end);
+	else if (abs(end->y - start->y) < abs(end->x - start->x))
+		less_one(mlx, start, end);
+	else
+		more_one(mlx, start, end);
+}
+
+void bresenham(int x0, int y0, int x1, int y1)
+{
+	int dx = abs(x1 - x0);
+	int dy = -abs(y1 - y0);
+
+	int sx = x0 < x1 ? 1 : -1;
+	int sy = y0 < y1 ? 1 : -1;
+	int err = dx + dy; // error value e_xy
+	while (true)
+	{
+		pixel_put(mlx, x0, y0, map->dot[(map->width * y0) + x0]->color);
+		if (x0 == x1 && y0 == y1)
+			break;
+		int e2 = 2 * err;
+		if (e2 >= dy) // e_xy+e_x > 0
+			err += dy;
+		x0 += sx;
+		if (e2 <= dx) // e_xy+e_y < 0
+			err += dx;
+		y0 += sy;
+	}
+}

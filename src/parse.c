@@ -6,48 +6,50 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/20 05:56:31 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/20 07:30:02 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	set_map_color_dot(t_map *map, char *line, int height)
+static void	set_map_color_dot(t_map *map, char *line, int j)
 {
-	int		j;
+	int		i;
 	char	**split;
 	char	*color;
 
 	split = ft_split(line, ' ');
 	if (!split)
 		ft_puterror("Error: split mallocate fail");
-	j = -1;
-	while (split[++j])
+	i = -1;
+	while (split[++i])
 	{
-		color = ft_strchr(split[j], ',');
+		color = ft_strchr(split[i], ',');
 		if (color)
-			map->dot[(map->width * height) + j]->color = (*color) + 1;
+			map->dot[(map->width * j) + i]->color = (*color) + 1;
 		else
-			map->dot[(map->width * height) + j]->color = 0x00FFFFFF;
-		map->dot[(map->width * height) + j]->z = ft_atoi(split[j]);
-		free(split[j]);
+			map->dot[(map->width * j) + i]->color = 0x00FFFFFF;
+		map->dot[(map->width * j) + i]->x = i;
+		map->dot[(map->width * j) + i]->y = j;
+		map->dot[(map->width * j) + i]->z = ft_atoi(split[i]);
+		free(split[i]);
 	}
-	free(split[j]);
+	free(split[i]);
 }
 
 static void	set_map(t_map *map, int fd)
 {
-	int		height;
+	int		j;
 	char	*line;
 
 	map->dot = (t_point **)malloc(sizeof(t_point *) * map->height * map->width); 
 	if (map->dot)
 		ft_puterror("Error: map->map mallocte fail");
-	height = -1;
-	while (++height < map->height)
+	j = -1;
+	while (++j < map->height)
 	{
 		line = get_next_line(fd);
-		set_map_color_dot(map, line, height);
+		set_map_color_dot(map, line, j);
 		free(line);
 	}
 }

@@ -16,7 +16,8 @@ NAME=libmlx.dylib
 INC=-I.
 #OPTI=-Ounchecked
 
-all: $(NAME)
+all: 
+	$(MAKE) -j6 $(NAME)
 
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz

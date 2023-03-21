@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/21 20:13:28 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/21 20:21:55 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,7 @@ BUILD_DIR	=	build
 SRC			=	$(addprefix $(SRC_DIR)/, fdf.c init.c parse.c draw.c algorithm.c key_hook.c utils.c)
 OBJ			=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
 
-all:	
-	@$(MAKE) -j6 $(NAME)
+all:	$(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(GNL) $(MLX)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) -framework Metal -framework MetalKit -framework QuartzCore

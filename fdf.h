@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 19:35:59 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:42:22 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ typedef struct s_bresenham
 	/* function */
 void	fdf(char **argv);
 
-void	init(t_mlx *mlx, char *argv);
-t_point	*init_point(t_map *map, int x, int y);
-void	parse(t_map *map, char *filename);
+void	init(t_mlx *mlx, t_map *map, char *argv);
+t_point	*init_point(t_point dot, int x, int y);
+void	parse(t_map *map, char *argv);
 void	pixel_put(t_mlx *mlx, t_point *p);
 
 void	draw(t_mlx *mlx, t_map *map);

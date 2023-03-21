@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 20:13:01 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:54:37 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static void	set_map_color_dot(t_point *dot, char **split, char *line, int i)
 	j = -1;
 	while (split[++j])
 	{
-		dot->x = j;
-		dot->y = i;
-		dot->z = ft_atoi(split[j]);
+		dot[j].x = j;
+		dot[j].y = i;
+		dot[j].z = ft_atoi(split[j]);
 		color = ft_strchr(split[j], ',');
 		if (color)
-			dot->color = (*color) + 1;
+			dot[j].color = (*color) + 1;
 		else
-			dot->color = 0x00FFFFFF;
-		free(split[j]); 
+			dot[j].color = 0x00FFFFFF;
+		free(split[j]);
 	}
 	free(split[j]);
 }
@@ -101,7 +101,6 @@ void	parse(t_map *map, char *argv)
 	int		fd;
 
 	fd = file_check(argv);
-	map = (t_map *)malloc(sizeof(t_map));
 	cal_map_size(map, argv);
 	set_map(map, fd);
 	if (map->width == 0 || map->height == 0)

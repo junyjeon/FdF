@@ -17,7 +17,7 @@ INC=-I.
 #OPTI=-Ounchecked
 
 all: 
-	$(MAKE) -j6 $(NAME)
+	$(MAKE) -j $(NAME)
 
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz

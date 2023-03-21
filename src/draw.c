@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 18:36:31 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:47:21 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	draw_background(t_mlx *mlx, t_map *map)
 	{
 		i = -1;
 		while (++i < SCRN_WIDTH)
-			pixel_put(mlx, init_point(map, i, j));
+			pixel_put(mlx, init_point(map->dot[j][i], i, j));
 	}
 }
 

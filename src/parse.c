@@ -6,11 +6,12 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 20:54:37 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/22 00:18:20 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "stdio.h"
 
 static void	set_map_color_dot(t_point *dot, char **split, char *line, int i)
 {
@@ -24,8 +25,9 @@ static void	set_map_color_dot(t_point *dot, char **split, char *line, int i)
 		dot[j].y = i;
 		dot[j].z = ft_atoi(split[j]);
 		color = ft_strchr(split[j], ',');
+		printf("%d", dot[j].color);
 		if (color)
-			dot[j].color = (*color) + 1;
+			dot[j].color = ft_atoi_base(color, "0123456789ABCDEF", 16);
 		else
 			dot[j].color = 0x00FFFFFF;
 		free(split[j]);

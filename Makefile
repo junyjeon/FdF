@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/21 20:21:55 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/22 00:14:00 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ LDFLAGS		=	-L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lGNL -L$(MLX_DIR) -lmlx
 SRC_DIR		=	src
 BUILD_DIR	=	build
 
-SRC			=	$(addprefix $(SRC_DIR)/, fdf.c init.c parse.c draw.c algorithm.c key_hook.c utils.c)
+SRC			=	$(addprefix $(SRC_DIR)/, fdf.c init.c parse.c draw.c algorithm.c key_hook.c utils.c utils2.c)
 OBJ			=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
 
 all:	$(NAME)

@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/20 05:15:58 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/21 19:34:57 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ all:
 	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(GNL) $(MLX)
-	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) -framework Cocoa -framework Metal -framework MetalKit -framework QuartzCore
+	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) -framework Metal -framework MetalKit -framework QuartzCore
 	@echo "$(GREEN)SUCCESS$(END)"
 
 $(LIBFT):

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/20 07:30:18 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:35:59 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,25 @@ typedef struct s_map
 	int		height;
 }		t_map;
 
-/* function */
+typedef struct s_bresenham
+{
+	int	w;
+	int	h;
+	int	increment_x;
+	int	increment_y;
+}		t_bresenham;
+
+	/* function */
 void	fdf(char **argv);
 
 void	init(t_mlx *mlx, char *argv);
+t_point	*init_point(t_map *map, int x, int y);
 void	parse(t_map *map, char *filename);
+void	pixel_put(t_mlx *mlx, t_point *p);
 
 void	draw(t_mlx *mlx, t_map *map);
-//void	bresenham(t_mlx *mlx, t_map *map, t_point *start, t_point *end);
+void	bresenham(t_mlx *mlx, t_point *start, t_point *end);
+static	t_point	*isometric(t_point *dot);
 
 /* utils */
 void	rotate_x(int *y, int *z, double alpha);
@@ -82,7 +93,6 @@ void	ft_puterror(char *str);
 
 /* key_hook */
 int		key_hook(int keycode, t_mlx *mlx);
-
 
 // void	draw_map(t_mlx *mlx);
 // int	create_argb(int a, int r, int g, int b);

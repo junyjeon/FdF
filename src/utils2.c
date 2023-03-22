@@ -6,13 +6,13 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:59:39 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/22 23:53:16 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:50:26 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_atoi_base(char *str, char *base, int base_l)
+int	ft_atoi_base(char *str)
 {
 	long long	res;
 

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 00:34:20 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:06:10 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	parallel_movement(t_map *map, int flag)
 	}
 }
 
-static void	scaling(t_mlx *mlx, t_map *map)
+static void	scaling(t_map *map)
 {
 	int	i;
 	int	j;
@@ -58,12 +58,12 @@ static void	scaling(t_mlx *mlx, t_map *map)
 		{
 			map->dot[j][i].x *= SCRN_WIDTH / 2 / map->width;
 			map->dot[j][i].y *= SCRN_HEIGHT / 2 / map->height;
-			map->dot[j][i].z *= 3;
+			map->dot[j][i].z *= 4;
 		}
 	}
 }
 
-static void	draw_background(t_mlx *mlx, t_map *map)
+static void	draw_background(t_mlx *mlx)
 {
 	int		i;
 	int		j;
@@ -82,9 +82,9 @@ void	draw(t_mlx *mlx, t_map *map)
 	int	i;
 	int	j;
 
-	draw_background(mlx, map);
+	draw_background(mlx);
 	parallel_movement(map, ORIGIN);
-	scaling(mlx, map);
+	scaling(map);
 	isometric(map);
 	parallel_movement(map, 0);
 	j = -1;

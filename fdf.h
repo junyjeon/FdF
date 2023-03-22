@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 00:39:50 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:53:36 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,17 @@ typedef struct s_bresenham
 	int	increment_y;
 }		t_bresenham;
 
-	/* function */
+/* functions */
 void	fdf(char **argv);
 
-void	init(t_mlx *mlx, t_map *map, char *argv);
+/* init */
+void	init(t_mlx *mlx, char *argv);
 t_point	*init_point(int x, int y);
 
+/* parse */
 void	parse(t_map *map, char *argv);
 
+/* draw */
 void	draw(t_mlx *mlx, t_map *map);
 void	pixel_put(t_mlx *mlx, t_point *p);
 void	parallel_movement(t_map *map, int flag);
@@ -98,7 +101,7 @@ void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
 void	ft_puterror(char *str);
-int		ft_atoi_base(char *str, char *base, int base_l);
+int		ft_atoi_base(char *str);
 
 /* key_hook */
 int		key_hook(t_mlx *mlx, int keycode);

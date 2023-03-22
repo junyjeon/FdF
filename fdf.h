@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 00:37:46 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:39:50 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "lib/mlx/mlx.h"
-# include "key_macros.h"
 # include "math.h"
 # include <unistd.h>
 # include <fcntl.h>

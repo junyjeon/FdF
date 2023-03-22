@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 23:52:38 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/22 23:58:30 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	fdf(char **argv)
 {
-	t_mlx		mlx;
-	t_map		map;
+	t_mlx	mlx;
+	t_map	map;
 
 	init(&mlx, &map, argv[1]);
 	parse(&map, argv[1]);

@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:21:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 23:40:46 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/22 23:59:05 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	bresenham(t_mlx *mlx, t_point start, t_point end)
 	br.increment_y = 1;
 	if (br.w < 0)
 		nagative_increase(&br.w, &br.increment_x);
-	if (br.h < 0) 
+	if (br.h < 0)
 		nagative_increase(&br.h, &br.increment_y);
 	if (br.h > br.w)
 		slope_upper_than_one(mlx, start, end, br);

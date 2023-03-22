@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 23:57:23 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:37:07 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <fcntl.h>
 
 /* SCREEN SIZE */
-# define SCRN_WIDTH 1920
-# define SCRN_HEIGHT 1080
+# define SCRN_WIDTH			1920
+# define SCRN_HEIGHT		1080
 
-/* color */
+/* COLOR */
 # define CLR_TEXT			0xEAEAEA
 # define CLR_MAIN_SCRN_BG	0x222222
 # define CLR_SUB_SCRN_BG	0x1E1E1E
@@ -36,10 +36,13 @@
 # define CLR_SAFFRON		0xF3AF3D
 
 /* PI */
-# define PI_DIVIDE_6 0.5236
+# define PI_DIVIDE_6		0.5236
 
-/* */
-# define ORIGIN 1
+/* PARALLEL_MOVEMENT */
+# define ORIGIN				1
+
+/* KEY_MACRO */
+# define KEY_ESCAPE			53
 
 typedef struct s_mlx
 {
@@ -65,6 +68,8 @@ typedef struct s_map
 	t_point	**dot;
 	int		width;
 	int		height;
+	int		z_min;
+	int		z_max;
 }		t_map;
 
 typedef struct s_bresenham
@@ -80,10 +85,11 @@ void	fdf(char **argv);
 
 void	init(t_mlx *mlx, t_map *map, char *argv);
 t_point	*init_point(int x, int y);
+
 void	parse(t_map *map, char *argv);
-void	pixel_put(t_mlx *mlx, t_point *p);
 
 void	draw(t_mlx *mlx, t_map *map);
+void	pixel_put(t_mlx *mlx, t_point *p);
 void	parallel_movement(t_map *map, int flag);
 void	bresenham(t_mlx *mlx, t_point start, t_point end);
 void	isometric(t_map *map);
@@ -96,6 +102,6 @@ void	ft_puterror(char *str);
 int		ft_atoi_base(char *str, char *base, int base_l);
 
 /* key_hook */
-int		key_hook(int keycode, t_mlx *mlx);
+int		key_hook(t_mlx *mlx, int keycode);
 
 #endif

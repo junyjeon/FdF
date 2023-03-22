@@ -6,51 +6,30 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:59:39 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/21 23:59:58 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/22 23:53:16 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	check(char c, char *base)
-{
-	int	i;
-
-	i = 0;
-	while (base[i])
-	{
-		if (c == base[i])
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
 int	ft_atoi_base(char *str, char *base, int base_l)
 {
-	long	res;
-	int		sign;
-	int		i;
+	long long	res;
 
 	if (*str == '\0')
 		return (0);
-	sign = 1;
 	res = 0;
-	i = 0;
-	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
-		i++;
-	while (str[i] == '+' || str[i] == '-')
+	while ((9 <= *str && *str <= 13) || *str == 32)
+		str++;
+	while (*str)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		if ('0' <= *str && *str <= '9')
+			res = res * 16 + (*str - '0');
+		if ('A' <= *str && *str <= 'F')
+			res = res * 16 + (*str - 55);
+		if ('a' <= *str && *str <= 'f')
+			res = res * 16 + (*str - 87);
+		str++;
 	}
-	while (str[i])
-	{
-		if (check(str[i], base) == -1)
-			break ;
-		res = res * base_l + check(str[i], base);
-		i++;
-	}
-	return (res * sign);
+	return (res);
 }

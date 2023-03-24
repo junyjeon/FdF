@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 03:39:46 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:59:25 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ typedef struct s_map
 	t_point	**dot;
 	int		width;
 	int		height;
-	int		z_min;
-	int		z_max;
 }		t_map;
 
 typedef struct s_bresenham

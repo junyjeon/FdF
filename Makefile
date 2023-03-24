@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/23 01:01:31 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/23 03:09:37 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@
 NAME		=	fdf
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		+=	-fsanitize=address
 
 LIBFT_DIR	=	./lib/libft
 LIBFT		=	$(LIBFT_DIR)/libft.a

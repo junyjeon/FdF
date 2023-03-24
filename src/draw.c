@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:30 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 01:06:10 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 03:16:52 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,11 @@ static void	scaling(t_map *map)
 	}
 }
 
-static void	draw_background(t_mlx *mlx)
-{
-	int		i;
-	int		j;
-
-	j = -1;
-	while (++j < SCRN_HEIGHT)
-	{
-		i = -1;
-		while (++i < SCRN_WIDTH)
-			pixel_put(mlx, init_point(i, j));
-	}
-}
-
 void	draw(t_mlx *mlx, t_map *map)
 {
 	int	i;
 	int	j;
 
-	draw_background(mlx);
 	parallel_movement(map, ORIGIN);
 	scaling(map);
 	isometric(map);

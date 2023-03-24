@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 00:53:36 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/23 03:39:46 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	fdf(char **argv);
 
 /* init */
 void	init(t_mlx *mlx, char *argv);
-t_point	*init_point(int x, int y);
 
 /* parse */
 void	parse(t_map *map, char *argv);
@@ -104,6 +103,6 @@ void	ft_puterror(char *str);
 int		ft_atoi_base(char *str);
 
 /* key_hook */
-int		key_hook(t_mlx *mlx, int keycode);
+int		key_hook(int keycode);
 
 #endif

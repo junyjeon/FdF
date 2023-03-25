@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/24 22:59:25 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/26 02:51:59 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 
 /* KEY_MACRO */
 # define KEY_ESCAPE			53
+# define KEY_RED_CROSS		17
 
 typedef struct s_mlx
 {
@@ -94,13 +95,11 @@ void	bresenham(t_mlx *mlx, t_point start, t_point end);
 void	isometric(t_map *map);
 
 /* utils */
-void	rotate_x(int *y, int *z, double alpha);
-void	rotate_y(int *x, int *z, double beta);
-void	rotate_z(int *x, int *y, double gamma);
 void	ft_puterror(char *str);
 int		ft_atoi_base(char *str);
 
 /* key_hook */
-int		key_hook(int keycode);
+int		key_press(t_mlx *mlx, int keycode);
+int		red_cross(t_mlx *mlx);
 
 #endif

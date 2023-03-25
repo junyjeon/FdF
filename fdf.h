@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 04:13:29 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/26 05:30:30 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	isometric(t_map *map);
 /* utils */
 void	ft_puterror(char *str);
 int		ft_atoi_base(char *str);
+void	ft_free(t_map *map);
 
 /* key_hook */
 int		key_press(int key_symbol, t_mlx *mlx);

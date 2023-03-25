@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/24 18:04:22 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/03/25 22:05:02 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ OBJ			=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
 
 all:	$(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(GNL) $(MLX)
+$(NAME): $(OBJ) $(MLX) $(LIBFT) $(GNL)
+	@cp $(MLX) .
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) -framework Metal -framework MetalKit -framework QuartzCore
 	@echo "$(GREEN)SUCCESS$(END)"
 
@@ -61,7 +62,7 @@ clean:
 	@$(RM) -r $(BUILD_DIR)
 
 fclean: clean
-	@$(RM) -r $(NAME) $(LIBFT) $(GNL) $(MLX) $(BUILD_DIR) fdf
+	@$(RM) -r $(NAME) $(LIBFT) $(GNL) $(MLX) libmlx.dylib $(BUILD_DIR) fdf
 
 re: fclean
 	@$(MAKE)

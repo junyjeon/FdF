@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 02:51:59 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/26 04:13:29 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,8 @@
 # define SCRN_HEIGHT		1080
 
 /* COLOR */
-# define CLR_TEXT			0xEAEAEA
-# define CLR_MAIN_SCRN_BG	0x222222
-# define CLR_SUB_SCRN_BG	0x1E1E1E
-# define CLR_DISCO			0x9A1F6A
-# define CLR_BRICK_RED		0xC2294E
-# define CLR_FLAMINGO		0xEC4B27
-# define CLR_JAFFA			0xEF8633
-# define CLR_SAFFRON		0xF3AF3D
+# define CLR_CHROME_YELLOW	0xFFA700
+# define CLR_VIVA_MAGENTA	0xBB2649
 
 /* PI */
 # define PI_DIVIDE_6		0.5236
@@ -99,7 +93,7 @@ void	ft_puterror(char *str);
 int		ft_atoi_base(char *str);
 
 /* key_hook */
-int		key_press(t_mlx *mlx, int keycode);
+int		key_press(int key_symbol, t_mlx *mlx);
 int		red_cross(t_mlx *mlx);
 
 #endif

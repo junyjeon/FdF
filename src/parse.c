@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/23 03:14:04 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/26 03:48:17 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	set_dot_color(t_point *dot, char **split, int i)
 		if (color)
 			dot[j].color = ft_atoi_base(color + 3);
 		else
-			dot[j].color = 0x00FF00FF;
+			dot[j].color = CLR_VIVA_MAGENTA;
 		free(split[j]);
 	}
 	free(split[j]);
@@ -40,9 +40,6 @@ static void	set_map(t_map *map, int fd)
 	char	**split;
 	char	*line;
 
-	map->dot = ft_calloc(map->height, sizeof(t_point *));
-	if (!map->dot)
-		ft_puterror("Error: map->dot mallocte fail");
 	i = -1;
 	while (++i < map->height)
 	{
@@ -53,6 +50,8 @@ static void	set_map(t_map *map, int fd)
 		j = 0;
 		while (split[j])
 			j++;
+		if (i != 0 && map->width != j)
+			ft_puterror("Error: improper formatted.");
 		map->width = j;
 		map->dot[i] = ft_calloc(map->width, sizeof(t_point));
 		if (!map->dot[i])
@@ -89,6 +88,9 @@ void	parse(t_map *map, char *argv)
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		ft_puterror("Failed to open file.\n");
+	map->dot = ft_calloc(map->height, sizeof(t_point *));
+	if (!map->dot)
+		ft_puterror("Error: map->dot mallocte fail");
 	set_map(map, fd);
 	close(fd);
 	if (map->width == 0 || map->height == 0)

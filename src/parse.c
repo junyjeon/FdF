@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 05:16:59 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/27 08:12:07 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	set_dot_color(t_point *dot, char **split, int i)
 		if (color)
 			dot[j].color = ft_atoi_base(color + 3);
 		else
-			dot[j].color = CLR_VIVA_MAGENTA;
+			dot[j].color = CLR_DEFAULT;
 		free(split[j]);
 	}
 	free(split[j]);

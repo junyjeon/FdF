@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 05:27:07 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/27 06:39:50 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	fdf(char **argv)
 	parse(&map, argv[1]);
 	draw(&mlx, &map);
 	ft_free(&map);
-	mlx_hook(mlx.win, 2, 0, key_press, &mlx);
-	mlx_hook(mlx.win, 17, 0, red_cross, &mlx);
+	ft_hook(&mlx);
 	mlx_loop(mlx.mlx);
 }
 

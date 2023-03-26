@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:32 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/27 06:40:01 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/27 08:04:52 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	red_cross(t_mlx *mlx)
 	return (0);
 }
 
-int	hook(t_mlx *mlx)
+void	ft_hook(t_mlx *mlx)
 {
 	mlx_hook(mlx->win, 2, 0, key_press, mlx);
 	mlx_hook(mlx->win, 17, 0, red_cross, mlx);

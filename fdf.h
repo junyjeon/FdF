@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 05:30:30 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/03/27 08:07:45 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 /* COLOR */
 # define CLR_CHROME_YELLOW	0xFFA700
 # define CLR_VIVA_MAGENTA	0xBB2649
+# define CLR_DEFAULT		0xFFFFFF
 
 /* PI */
 # define PI_DIVIDE_6		0.5236
@@ -94,6 +95,7 @@ int		ft_atoi_base(char *str);
 void	ft_free(t_map *map);
 
 /* key_hook */
+void	ft_hook(t_mlx *mlx);
 int		key_press(int key_symbol, t_mlx *mlx);
 int		red_cross(t_mlx *mlx);
 

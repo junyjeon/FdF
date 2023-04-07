@@ -6,7 +6,7 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/27 06:39:30 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/04/07 09:56:50 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ clean:
 	@$(RM) -r $(BUILD_DIR)
 
 fclean: clean
-	@$(RM) -r $(NAME) $(LIBFT) $(GNL) $(MLX) libmlx.dylib $(BUILD_DIR) fdf
+	@$(RM) -r $(NAME) $(LIBFT) $(GNL) $(MLX) libmlx.dylib
 
 re: fclean
 	@$(MAKE)

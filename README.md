@@ -33,7 +33,7 @@ fdf
 
 ## 📍Overview
 
-The fdf project on GitHub is a 3D modeling tool that allows users to create meshes for 3D objects. It includes tools for managing and editing vertices, faces, edges, and
+The FDF Project on GitHub is a comprehensive 3D modeling tool designed to enable users to create and manipulate 3D object meshes. This powerful software package comes with a robust set of features for managing and editing vertices, faces, edges, and other essential components of 3D models. Aimed at providing a seamless and user-friendly experience, the FDF project facilitates the design and creation process for artists, engineers, and enthusiasts alike.
 
 ## 🔮 Feautres
 

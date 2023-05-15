@@ -38,7 +38,7 @@ The FDF Project on GitHub is a comprehensive 3D modeling tool designed to enable
 ## 🔮 Feautres
 
 > `[📌  Bresenham's Line Drawing]`
-> '[📌  isometric projection]'
+> `[📌  isometric projection]`
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Perspective_isometrique_cube_gris.svg/1200px-Perspective_isometrique_cube_gris.svg.png" width=600 />
 
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-github-open.svg" width="80" />

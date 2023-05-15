@@ -60,6 +60,65 @@ repo
 │   │   ├── ft_atoi.c
 │   │   ├── ft_bzero.c
 │   │   ├── ft_calloc.c
+│   │   ├─)" width="100" />
+<br>
+fdf
+</h1>
+<h3 align="center">📍 FDF: Explore the World of Files!</h3>
+<h3 align="center">🚀 Developed with the software and tools below.</h3>
+<p align="center">
+
+<img src="https://img.shields.io/badge/Swift-F05138.svg?style=for-the-badge&logo=Swift&logoColor=white" alt="" />
+<img src="https://img.shields.io/badge/C-A8B9CC.svg?style=for-the-badge&logo=C&logoColor=black" alt="pack" />
+</p>
+
+</div>
+
+---
+## 📚 Table of Contents
+- [📚 Table of Contents](#-table-of-contents)
+- [📍Overview](#-introdcution)
+- [🔮 Features](#-features)
+- [⚙️ Project Structure](#project-structure)
+- [🧩 Modules](#modules)
+- [🏎💨 Getting Started](#-getting-started)
+- [🗺 Roadmap](#-roadmap)
+- [🤝 Contributing](#-contributing)
+- [🪪 License](#-license)
+- [📫 Contact](#-contact)
+- [🙏 Acknowledgments](#-acknowledgments)
+
+---
+
+## 📍Overview
+
+The FDF Project on GitHub is a comprehensive 3D modeling tool designed to enable users to create and manipulate 3D object meshes. This powerful software package comes with a robust set of features for managing and editing vertices, faces, edges, and other essential components of 3D models. Aimed at providing a seamless and user-friendly experience, the FDF project facilitates the design and creation process for artists, engineers, and enthusiasts alike.
+
+## 🔮 Feautres
+
+> `[📌  INSERT-PROJECT-FEATURES]`
+
+---
+
+<img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-github-open.svg" width="80" />
+
+## ⚙️ Project Structure
+
+```bash
+repo
+├── Makefile
+├── fdf.h
+├── lib
+│   ├── get_next_line
+│   │   ├── Makefile
+│   │   ├── get_next_line.c
+│   │   ├── get_next_line.h
+│   │   └── get_next_line_utils.c
+│   ├── libft
+│   │   ├── Makefile
+│   │   ├── ft_atoi.c
+│   │   ├── ft_bzero.c
+│   │   ├── ft_calloc.c
 │   │   ├── ft_isalnum.c
 │   │   ├── ft_isalpha.c
 │   │   ├── ft_isascii.c

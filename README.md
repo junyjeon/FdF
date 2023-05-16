@@ -2,7 +2,7 @@
 <div align="center">
 <h1 align="center">
 <br>
-fdf
+FDF
 </h1>
 <img src="https://velog.velcdn.com/images%2Fminjune8506%2Fpost%2F1dc4f20e-ca5b-4a84-9e9f-d7dafbd6f076%2Ffdf_img.png" />
 <h3 align="center">📍 FDF: Explore the World of Files!</h3>

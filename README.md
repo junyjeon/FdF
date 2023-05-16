@@ -4,6 +4,7 @@
 <br>
 fdf
 </h1>
+<img src="https://velog.velcdn.com/images%2Fminjune8506%2Fpost%2F1dc4f20e-ca5b-4a84-9e9f-d7dafbd6f076%2Ffdf_img.png" />
 <h3 align="center">📍 FDF: Explore the World of Files!</h3>
 <h3 align="center">🚀 Developed with the software and tools below.</h3>
 <p align="center">
@@ -32,7 +33,6 @@ fdf
 
 ## 📍Overview
 <div align="center"> 
-<img src="https://velog.velcdn.com/images%2Fminjune8506%2Fpost%2F1dc4f20e-ca5b-4a84-9e9f-d7dafbd6f076%2Ffdf_img.png" />
 <img src="https://github.com/junyjeon/fdf/assets/98337069/c14a00e4-f598-4c5e-9c74-11c0fb9003a1" />
 <img src="https://github.com/junyjeon/fdf/assets/98337069/fcfeca6c-be2b-4f2b-bbaa-2c197b613c96" />
 <img src="https://github.com/junyjeon/fdf/assets/98337069/bb57ed1c-8de3-4214-b60c-57d0c9b6e862" />

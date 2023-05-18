@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 17:59:38 by junyojeo          #+#    #+#              #
-#    Updated: 2023/03/14 03:25:08 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/05/19 01:59:12 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ all :		$(NAME)
 $(NAME) : mandatory
 
 mandatory : $(NAME)($(OBJ))
-clean : ; rm -f $(OBJ) $(BONUS_OBJ) 
+clean : ; rm -f $(OBJ)
 fclean : clean ; rm -f $(NAME)
 re:	fclean all
 
-.PHONY : all .c.o clean fclean re
+.PHONY : all clean fclean re

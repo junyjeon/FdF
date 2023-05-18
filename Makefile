@@ -3,20 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2023/04/07 09:56:50 by junyojeo         ###   ########.fr        #
+#    Updated: 2023/05/19 02:12:54 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# Define the complier and flags
 
 NAME		=	fdf
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3
-CFLAGS		+=	-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror# -g2
+# CFLAGS		+=	-fsanitize=address
 
 LIBFT_DIR	=	./lib/libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
@@ -30,17 +28,27 @@ MLX			=	$(MLX_DIR)/libmlx.dylib
 CPPFLAGS	=	-I. -I$(GNL_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 LDFLAGS		=	-L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lGNL -L$(MLX_DIR) -lmlx
 
-SRC_DIR		=	src
 BUILD_DIR	=	build
 
-SRC			=	$(addprefix $(SRC_DIR)/, fdf.c init.c parse.c draw.c algorithm.c hook.c utils.c)
-OBJ			=	$(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
+SRC			=	main.c init.c parse.c draw.c algorithm.c hook.c moving_hook.c utils.c utils2.c
+B_SRC		=	main_bonus.c init_bonus.c parse_bonus.c draw_bonus.c algorithm_bonus.c hook_bonus.c moving_hook_bonus.c utils_bonus.c utils2_bonus.c
+OBJ			=	$(SRC:.c=.o)
+B_OBJ		=	$(B_SRC:.c=.o)
+
+ifdef WITH_BONUS
+        OBJ_FILE = $(B_OBJ)
+else
+        OBJ_FILE = $(OBJ)
+endif
 
 all:	$(NAME)
 
-$(NAME): $(OBJ) $(MLX) $(LIBFT) $(GNL)
+$(NAME): $(OBJ_FILE)
+	@make -C $(MLX_DIR)
+	@make -C $(LIBFT_DIR)
+	@make -C $(GNL_DIR)
 	@cp $(MLX) .
-	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) -framework Metal -framework MetalKit -framework QuartzCore
+	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) -framework Metal -framework MetalKit -framework QuartzCore
 	@echo "$(GREEN)SUCCESS$(END)"
 
 $(LIBFT):
@@ -52,22 +60,22 @@ $(GNL):
 $(MLX):
 	@make -C $(MLX_DIR)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | mkdir
+%.o: %.c
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-mkdir:
-	@mkdir -p $(BUILD_DIR)
+bonus:
+	@make WITH_BONUS=1 all
 
 clean:
-	@$(RM) -r $(BUILD_DIR)
+	@$(RM) -r $(OBJ) $(B_OBJ)
 
-fclean: clean
+fclean:
+	make clean
 	@$(RM) -r $(NAME) $(LIBFT) $(GNL) $(MLX) libmlx.dylib
 
-re: fclean
-	@$(MAKE)
+re: fclean all
 
-GREEN			=	$'\x1b[32m
-YELLOW			=	$'\x1b[33m
+GREEN		=	$'\x1b[32m
+YELLOW		=	$'\x1b[33m
 
 .PHONY: all mkdir clean fclean re

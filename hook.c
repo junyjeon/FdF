@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:32 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/27 08:11:57 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/05/19 02:12:24 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	key_press(int key_symbol, t_mlx *mlx)
+int	key_press(int key, t_mlx *mlx)
 {
-	if (key_symbol == KEY_ESCAPE)
+	if (key == KEY_ESCAPE)
 	{
 		if (mlx->mlx && mlx->win)
 		{

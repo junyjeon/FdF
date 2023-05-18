@@ -1,62 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:49:48 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/27 12:52:27 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/05/19 01:08:22 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-static void	set_dot_color(t_point *dot, char **split, int i)
+static void	set_dot_color(t_point *dot_arr, char **split, int h)
 {
-	int		j;
+	int		idx;
 	char	*color;
 
-	j = -1;
-	while (split[++j])
+	idx = -1;
+	while (split[++idx])
 	{
-		dot[j].x = j;
-		dot[j].y = i;
-		dot[j].z = ft_atoi(split[j]);
-		color = ft_strchr(split[j], ',');
+		dot_arr[idx].x = idx;
+		dot_arr[idx].y = h;
+		dot_arr[idx].z = ft_atoi(split[idx]);
+		color = ft_strchr(split[idx], ',');
 		if (color)
-			dot[j].color = ft_atoi_base(color + 3);
+			dot_arr[idx].color = ft_atoi_base(color + 3);
 		else
-			dot[j].color = CLR_DEFAULT;
-		free(split[j]);
+			dot_arr[idx].color = CLR_DEFAULT;
+		free(split[idx]);
 	}
 	free(split);
 }
 
 static void	set_map(t_map *map, int fd)
 {
-	int		i;
-	int		j;
+	int		h;
+	int		w;
 	char	**split;
 	char	*line;
 
-	i = -1;
-	while (++i < map->height)
+	h = -1;
+	while (++h < map->height)
 	{
 		line = get_next_line(fd);
 		split = ft_split(line, ' ');
 		if (!split)
 			ft_puterror("Error: split mallocate fail");
-		j = 0;
-		while (split[j])
-			j++;
-		if (i != 0 && map->width != j)
+		w = 0;
+		while (split[w])
+			w++;
+		if (h != 0 && map->width != w)
 			ft_puterror("Error: improper formatted.");
-		map->width = j;
-		map->dot[i] = ft_calloc(map->width, sizeof(t_point));
-		if (!map->dot[i])
+		map->width = w;
+		map->dot[h] = ft_calloc(map->width, sizeof(t_point));
+		if (!map->dot[h])
 			ft_puterror("Error: map->dot mallocte fail");
-		set_dot_color(map->dot[i], split, i);
+		set_dot_color(map->dot[h], split, h);
 		free(line);
 	}
 }

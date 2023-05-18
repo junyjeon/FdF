@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:50:18 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 05:27:14 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/05/19 01:08:26 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	ft_puterror(char *str)
 {
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
 	exit(1);
-}
-
-void	ft_free(t_map *map)
-{
-	int	i;
-
-	i = -1;
-	while (++i < map->height)
-		free(map->dot[i]);
-	free(map->dot);
 }
 
 int	ft_atoi_base(char *str)

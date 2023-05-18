@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/26 00:03:24 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/05/19 01:09:53 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
+
+static void	init_view(t_mlx *mlx)
+{
+	mlx->zoom = 1;
+	mlx->offset_x = 0;
+	mlx->offset_y = 0;
+	mlx->alpha = 0;
+	mlx->beta = 0;
+	mlx->gamma = 0;
+	mlx->projection = ISO;
+}
 
 void	init(t_mlx *mlx, char *argv)
 {
@@ -27,4 +38,5 @@ void	init(t_mlx *mlx, char *argv)
 	&mlx->line_length, &mlx->endian);
 	if (!mlx->addr)
 		ft_puterror("Error: mlx addr fail");
+	init_view(mlx);
 }

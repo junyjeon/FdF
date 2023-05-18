@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:04:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/03/27 06:39:50 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/05/19 02:12:35 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 void	fdf(char **argv)
 {
 	t_mlx	mlx;
-	t_map	map;
 
 	init(&mlx, argv[1]);
-	parse(&map, argv[1]);
-	draw(&mlx, &map);
-	ft_free(&map);
+	parse(&mlx.map, argv[1]);
+	draw(&mlx);
 	ft_hook(&mlx);
+	mlx_key_hook(mlx.win, my_key_hook, &mlx);
 	mlx_loop(mlx.mlx);
 }
 

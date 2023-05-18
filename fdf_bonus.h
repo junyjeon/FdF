@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junyojeo <junyojeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 20:20:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2023/05/19 01:54:29 by junyojeo         ###   ########.fr       */
+/*   Updated: 2023/05/19 01:09:01 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include "libft.h"
 # include "get_next_line.h"
@@ -53,7 +53,7 @@
 # define KEY_EQUAL	24
 # define KEY_SPACE	49
 
-typedef enum e_projection
+typedef enum	e_projection
 {
 	PARALLE,
 	ISO
@@ -76,21 +76,21 @@ typedef struct s_map
 
 typedef struct s_mlx
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				offset_x;
-	int				offset_y;
-	float			alpha;
-	float			beta;
-	float			gamma;
-	int				zoom;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		offset_x;
+	int		offset_y;
+	float	alpha;
+	float	beta;
+	float	gamma;
+	int		zoom;
 	t_projection	projection;
-	t_map			map;
+	t_map	map;
 }		t_mlx;
 
 typedef struct s_bresenham

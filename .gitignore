@@ -56,5 +56,4 @@ dkms.conf
 .vscode
 build/
 fdf
-*.md
 test_maps

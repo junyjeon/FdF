@@ -2,7 +2,7 @@
   <h1>🗺️ FdF (Fil de Fer)</h1>
   <p>42Seoul의 첫 번째 그래픽스 프로젝트: 와이어프레임 모델 구현하기</p>
 
-  <img src="assets/fdf_preview.jpg" alt="FdF Preview" width="800">
+  <img src="assets/06_fdf_review.jpg" alt="FdF Preview" width="800">
 
   [![42 Score](https://img.shields.io/badge/Score-125%2F100-success?style=for-the-badge&logo=42)](https://github.com/your-username/fdf)
   [![Norminette](https://img.shields.io/badge/Norminette-passing-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)

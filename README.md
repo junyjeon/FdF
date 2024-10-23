@@ -212,7 +212,7 @@ void cleanup_fdf(t_fdf *fdf)
 
 
 ### 3. 성능 최적화
-````c
+```c
 // 이미지 버퍼 직접 조작
 void my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
 {
@@ -254,7 +254,7 @@ void performance_comparison(void)
     if (is_in_viewport(point))
         draw_point();
 }
-````
+```
 
 
 ### 3. 일반적인 문제와 해결방안

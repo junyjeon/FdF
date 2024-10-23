@@ -275,11 +275,6 @@ void performance_comparison(void)
 | 100x100 | ~15ms     | ~4MB         |
 | 200x200 | ~50ms     | ~8MB         |
 
-<div align="center">
-  <img src="images/performance_graph.png" width="600">
-  <p>맵 크기별 성능 그래프</p>
-</div>
-
 ## 📚 참고 자료
 
 ### 1. 필수 문서
@@ -290,16 +285,38 @@ void performance_comparison(void)
 
 ### 2. 추천 테스트 맵
 ```bash
-# 기본 테스트
-maps/42.fdf        # 기본 숫자 맵
-maps/pyramide.fdf  # 피라미드 형태
-maps/mars.fdf      # 복잡한 지형
-maps/t1.fdf        # 극단적인 높이차
+test_maps/42.fdf           # 기본 테스트 맵
+test_maps/pyra.fdf         # 피라미드 형태
+test_maps/elem.fdf         # 기초 요소 테스트
+test_maps/10-2.fdf         # 10x10 간단한 맵
+test_maps/20-60.fdf        # 20x20 복잡한 맵
+test_maps/50-4.fdf         # 50x50 중간 크기
+test_maps/100-6.fdf        # 100x100 큰 맵
+test_maps/basictest.fdf    # 기본 기능 테스트
+test_maps/elem-col.fdf     # 컬러 테스트
+test_maps/elem-fract.fdf   # 소수점 테스트
+test_maps/pentenegpos.fdf  # 양수/음수 혼합
+test_maps/plat.fdf         # 평면 테스트
 ```
 
 <div align="center">
-  <img src="images/test_maps.png" width="800">
-  <p>다양한 테스트 맵 예시</p>
+  <img src="assets/FdF42.png" alt="42 Map" width="400">
+  <p>42 맵 기본 출력</p>
+</div>
+
+<div align="center">
+  <img src="assets/FdF423D.png" alt="42 3D" width="400">
+  <p>42 맵 3D 회전</p>
+</div>
+
+<div align="center">
+  <img src="assets/FdF3D.png" alt="3D View" width="400">
+  <p>3D 뷰 조작</p>
+</div>
+
+<div align="center">
+  <img src="assets/FdF결과.png" alt="Final Result" width="800">
+  <p>최종 결과물</p>
 </div>
 
 ## ✅ 체크리스트

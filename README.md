@@ -301,12 +301,12 @@ test_maps/plat.fdf         # 평면 테스트
 
 <div align="center">
   <img src="assets/FdF42.png" alt="42 Map" width="400">
-  <p>42 맵 기본 출력</p>
+  <p>42 맵 기본 입력</p>
 </div>
 
 <div align="center">
   <img src="assets/FdF423D.png" alt="42 3D" width="400">
-  <p>42 맵 3D 회전</p>
+  <p>42 맵 기본 출력</p>
 </div>
 
 <div align="center">

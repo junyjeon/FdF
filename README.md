@@ -4,8 +4,9 @@
 
   <img src="assets/06_fdf_review.jpg" alt="FdF Preview" width="800">
 
-  [![42 Score](https://img.shields.io/badge/Score-123%2F100-success?style=for-the-badge&logo=42)](https://github.com/your-username/fdf)
+  [![42 Score](https://img.shields.io/badge/Score-123%2F100-success?style=for-the-badge&logo=42)](https://github.com/junyjeon/fdf)
   [![Norminette](https://img.shields.io/badge/Norminette-passing-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)
+  [![C](https://img.shields.io/badge/C-99-blue.svg?style=for-the-badge&logo=c)](https://github.com/junyjeon/fdf)
 </div>
 
 ## 📋 목차
@@ -36,7 +37,7 @@ FdF(Fil de Fer)는 "철사"라는 뜻의 프랑스어로, 3D 와이어프레임 
 - 3D → 2D 투영 구현
 - 기본적인 에러 처리
 
-### 2. 맵 파일 형식
+# 2. 맵 파일 형식
 ```
 0  0  0  0  0
 0  1  2  1  0
